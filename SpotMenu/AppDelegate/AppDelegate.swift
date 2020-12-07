@@ -12,7 +12,7 @@ import Cocoa
 import MusicPlayer
 import Sparkle
 import Fabric
-import Crashlytics
+//import FirebaseCrashlytics
 
 @NSApplicationMain
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -64,12 +64,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             self.statusItem.length = Constants.statusItemLength
         }
     }
+    
+    let pubsub = PubSub()
 
     // MARK: - AppDelegate methods
 
     func applicationDidFinishLaunching(_: Notification) {
-        Fabric.with([Crashlytics.self])
-        
+//        Fabric.with([Crashlytics.self])
         UserPreferences.initializeUserPreferences()
 
         musicPlayerManager = MusicPlayerManager()
@@ -102,6 +103,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if UserPreferences.keyboardShortcutEnabled {
             registerHotkey()
         }
+        
+        
+        pubsub.delegate = self
+        // execute background runner for PubSub. qos either background or utility
+        let queue = DispatchQueue(label: "PubSub", qos: .background)
+
+        queue.async { [weak self] in
+            guard let self = self else { return }
+            self.pubsub.runPubSub()
+//            while(true) {
+//                RunLoop.current.run(until: Date())
+//                usleep(10)
+//            }
+        }
+        
+        
+    }
+    
+    
+    func displayLiveListeners(_ listenerCount: AnyObject) {
+        print("listener count: \(listenerCount)")
     }
 
     func applicationWillTerminate(_: Notification) {
@@ -198,7 +220,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func updateTitle() {
-
         let statusItemTitle = StatusItemBuilder(
             title: musicPlayerManager.currentPlayer?.currentTrack?.title,
             artist: musicPlayerManager.currentPlayer?.currentTrack?.artist,
@@ -212,6 +233,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .getString()
         if lastStatusTitle != statusItemTitle {
             updateTitle(newTitle: statusItemTitle)
+            
+            guard let artistName = musicPlayerManager.currentPlayer?.currentTrack?.artist else { return }
+            
+            // execute background runner for PubSub. qos either background or utility
+            let queue = DispatchQueue(label: "PubSub", qos: .background)
+
+            queue.async { [weak self] in
+                guard let self = self else { return }
+                self.pubsub.subscribe(currentArtist: artistName)
+            }
         }
     }
 
