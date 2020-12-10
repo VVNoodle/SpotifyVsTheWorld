@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +12,7 @@
                 <outlet property="artistLabel" destination="91T-mi-mb9" id="Mhz-MF-AQx"/>
                 <outlet property="artworkImageView" destination="wMa-mO-ZXq" id="J3B-JE-v1D"/>
                 <outlet property="leftTime" destination="a3a-vx-FzU" id="mAS-xW-gGh"/>
+                <outlet property="listenerCount" destination="agO-HB-Ns6" id="mNb-io-FwN"/>
                 <outlet property="musicPlayerButton" destination="Sfg-o1-GVi" id="P2f-5V-oen"/>
                 <outlet property="playerStateButton" destination="8Ah-DM-iSN" id="ofG-4I-1Kw"/>
                 <outlet property="positionSlider" destination="tik-b2-9He" id="qyI-6l-HxF"/>
@@ -29,7 +30,7 @@
                 <box fixedFrame="YES" boxType="custom" borderWidth="0.0" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="9W0-aB-6El">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <view key="contentView" ambiguous="YES" id="4eT-nL-dpS">
+                    <view key="contentView" id="4eT-nL-dpS">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
@@ -41,7 +42,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" alignment="left" imageScaling="proportionallyUpOrDown" image="NSUserGuest" id="Rvb-hn-QkR"/>
                 </imageView>
-                <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" fixedFrame="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Z1i-Qx-pwO" customClass="CustomVisualEffect" customModule="SpotMenu" customModuleProvider="target">
+                <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" fixedFrame="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="Z1i-Qx-pwO" customClass="CustomVisualEffect" customModule="SpotifyVsTheWorld" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
@@ -149,6 +150,15 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="agO-HB-Ns6">
+                            <rect key="frame" x="252" y="268" width="37" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="IMQ-cN-P0J">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
                     </subviews>
                 </visualEffectView>
             </subviews>
@@ -163,7 +173,7 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSUserGuest" width="128" height="128"/>
-        <image name="StatusBarButtonImage" width="32" height="32"/>
+        <image name="NSUserGuest" width="32" height="32"/>
+        <image name="StatusBarButtonImage" width="16" height="16"/>
     </resources>
 </document>

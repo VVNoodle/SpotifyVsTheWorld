@@ -106,6 +106,9 @@ fileprivate extension MusicPlaybackState {
             self = .playing
         case .paused:
             self = .paused
+        default:
+            self = .paused
         }
+        
     }
 }

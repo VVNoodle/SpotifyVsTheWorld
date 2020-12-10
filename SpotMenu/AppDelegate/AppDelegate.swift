@@ -37,6 +37,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var lastStatusTitle: String = ""
     private var removeHudTimer: Timer?
     private var musicPlayerManager: MusicPlayerManager!
+    private let pubSubNotification = Notification.Name(rawValue: "PubSub")
 
     private lazy var statusItem: NSStatusItem = {
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -65,7 +66,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    let pubsub = PubSub()
+    
+    private let pubsub = PubSub()
+//    private var listenerCount: AnyObject = 0 as AnyObject
 
     // MARK: - AppDelegate methods
 
@@ -104,27 +107,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             registerHotkey()
         }
         
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(didUpdateListenerCount),
+//            name: pubSubNotification,
+//            object: nil
+//        )
         
-        pubsub.delegate = self
         // execute background runner for PubSub. qos either background or utility
         let queue = DispatchQueue(label: "PubSub", qos: .background)
 
         queue.async { [weak self] in
             guard let self = self else { return }
             self.pubsub.runPubSub()
-//            while(true) {
-//                RunLoop.current.run(until: Date())
-//                usleep(10)
-//            }
         }
-        
-        
     }
     
-    
-    func displayLiveListeners(_ listenerCount: AnyObject) {
-        print("listener count: \(listenerCount)")
-    }
+//    func didUpdateListenerCount(_ listenerCount: AnyObject) {
+//        self.listenerCount = listenerCount
+//
+//    }
 
     func applicationWillTerminate(_: Notification) {
         // Insert code here to tear down your application

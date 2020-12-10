@@ -32,12 +32,27 @@ class ScrollingStatusItemView: NSView {
         didSet {
             guard let text = text else { return }
             scrollingTextView.setup(string: text)
+            listenerCountTextView.setup(string: "🎧30043")
 
             if iconImageView.image == nil {
-                lengthHandler?(scrollingTextView.stringSize.width + Constants.padding)
+                lengthHandler?(scrollingTextView.stringSize.width + Constants.padding + listenerCountTextView.stringSize.width)
             } else {
-                lengthHandler?(scrollingTextView.stringSize.width + Constants.iconSize + Constants.padding)
+                lengthHandler?(scrollingTextView.stringSize.width + Constants.iconSize + Constants.padding + listenerCountTextView.stringSize.width)
             }
+            
+            // may need to revisit this logic
+            NSLayoutConstraint.deactivate([
+                listenerCountTextView.leftAnchor.constraint(equalTo: iconImageView.rightAnchor),
+                listenerCountTextView.topAnchor.constraint(equalTo: topAnchor),
+                listenerCountTextView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            ])
+            
+            NSLayoutConstraint.activate([
+                listenerCountTextView.widthAnchor.constraint(equalToConstant: listenerCountTextView.stringSize.width),
+                listenerCountTextView.leftAnchor.constraint(equalTo: iconImageView.rightAnchor),
+                listenerCountTextView.topAnchor.constraint(equalTo: topAnchor),
+                listenerCountTextView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            ])
         }
     }
 
@@ -68,6 +83,12 @@ class ScrollingStatusItemView: NSView {
 
     private lazy var scrollingTextView: ScrollingTextView = {
         let view = ScrollingTextView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var listenerCountTextView: ListenerCountTextView = {
+        let view = ListenerCountTextView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -109,21 +130,35 @@ class ScrollingStatusItemView: NSView {
     }
 }
 
+
 private extension ScrollingStatusItemView {
     func loadSubviews() {
         addSubview(iconImageView)
         addSubview(scrollingTextView)
+        addSubview(listenerCountTextView)
+        
+        listenerCountTextView.needsUpdateConstraints = true
+        print("update \(listenerCountTextView.stringSize.width)")
+        
+        NSLayoutConstraint.activate([
+            listenerCountTextView.leftAnchor.constraint(equalTo: iconImageView.rightAnchor),
+            listenerCountTextView.topAnchor.constraint(equalTo: topAnchor),
+            listenerCountTextView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
 
         NSLayoutConstraint.activate([
             scrollingTextView.rightAnchor.constraint(equalTo: rightAnchor),
             scrollingTextView.topAnchor.constraint(equalTo: topAnchor),
             scrollingTextView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            scrollingTextView.leftAnchor.constraint(equalTo: iconImageView.rightAnchor)])
+            scrollingTextView.leftAnchor.constraint(equalTo: listenerCountTextView.rightAnchor)
+        ])
 
         NSLayoutConstraint.activate([
             iconImageView.leftAnchor.constraint(equalTo: leftAnchor),
             iconImageView.topAnchor.constraint(equalTo: topAnchor),
             iconImageView.bottomAnchor.constraint(equalTo: bottomAnchor)])
+        
+
     }
 
     func clicked(_ bool: Bool) {

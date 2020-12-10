@@ -9,11 +9,15 @@
 import Foundation
 import ScClient
 
-class PubSub {
+public protocol PubSubDelegate: class {
+    func didUpdateListenerCount(notification: NSNotification) -> Void
+}
+
+final class PubSub {
     var client = ScClient(url: "http://localhost:8000/socketcluster/")
     var fclient: ScClient? = nil
     var currentArtist: String = ""
-    public var delegate: AppDelegate!
+    public weak var delegate: PubSubDelegate!
 
     var onConnect = {
         (client :ScClient) in
@@ -57,8 +61,9 @@ class PubSub {
         client.onChannel(channelName: currentArtist, ack: {
             (channelName : String , data : AnyObject?) in
             print ("Got data for channel", channelName, " object data is ", data! as AnyObject)
-            DispatchQueue.main.async { [weak self] in
-                self?.delegate.displayLiveListeners(data! as AnyObject)
+            DispatchQueue.main.async {
+                let name = Notification.Name(rawValue: "PubSub")
+                NotificationCenter.default.post(name: name, object: (data! as AnyObject))
             }
         })
         

@@ -2,10 +2,9 @@ import Cocoa
 import MusicPlayer
 import WebKit
 
-final class PopOverViewController: NSViewController {
-
+final class PopOverViewController:
+    NSViewController {
     // MARK: - Properties
-
     private var lastArtworkUrl = ""
     fileprivate var rightTimeIsDuration: Bool = true
     private var defaultImage: NSImage!
@@ -16,7 +15,8 @@ final class PopOverViewController: NSViewController {
     private var timer: Timer!
     private let spotMenuIcon = NSImage(named: NSImage.Name(rawValue: "StatusBarButtonImage"))
     private let spotMenuIconItunes = NSImage(named: NSImage.Name(rawValue: "StatusBarButtonImageItunes"))
-
+    private let pubSubNotification = Notification.Name(rawValue: "PubSub")
+    
     // MARK: - IBOutlets
 
     @IBOutlet fileprivate var positionSlider: NSSlider!
@@ -28,7 +28,8 @@ final class PopOverViewController: NSViewController {
     @IBOutlet private var leftTime: NSTextField!
     @IBOutlet private var rightTime: NSTextField!
     @IBOutlet private var musicPlayerButton: NSButton!
-
+    @IBOutlet private var listenerCount: NSTextField!
+    
     // MARK: - Lifecycle methods
 
     override func viewDidLoad() {
@@ -83,6 +84,25 @@ final class PopOverViewController: NSViewController {
         timer.invalidate()
         musicPlayerManager.delegate = nil
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didUpdateListenerCount),
+            name: pubSubNotification,
+            object: nil
+        )
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+           super.init(coder: aDecoder)
+       }
 
     // MARK: - Public methods
 
@@ -253,6 +273,17 @@ extension PopOverViewController: MusicPlayerManagerDelegate {
 
     func manager(_: MusicPlayerManager, trackingPlayerDidChange player: MusicPlayer) {
         updateMusicPlayerIcon(musicPlayerName: player.name)
+    }
+}
+
+extension PopOverViewController: PubSubDelegate {
+    @objc func didUpdateListenerCount(notification: NSNotification) {
+        guard let listenerCount = notification.object else { return }
+        print("listener count \(listenerCount)")
+        print("lister count type \(listenerCount is Int)")
+        if listenerCount is Int {
+            self.listenerCount.stringValue = String(listenerCount as! Int)
+        }
     }
 }
 
