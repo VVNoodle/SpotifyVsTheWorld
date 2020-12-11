@@ -14,7 +14,7 @@ class ListenerCountTextView: NSView {
     /// Text to scroll
     open var text: NSString?
     
-    open var textColor: NSColor = .black
+    open var textColor: NSColor = .yellow
     
     /// Font for scrolling text
     open var font: NSFont?
@@ -40,7 +40,7 @@ class ListenerCountTextView: NSView {
     private lazy var textFontAttributes: [NSAttributedString.Key: Any] = {
         return [
             NSAttributedString.Key.font: font ?? NSFont.systemFont(ofSize: 14),
-            NSAttributedString.Key.backgroundColor: (.yellow as NSColor)
+            NSAttributedString.Key.backgroundColor: (NSColor.init(red: 255, green: 255, blue: 255, alpha: 1))
         ]
     }()
 //

@@ -12,7 +12,7 @@ open class ScrollingTextView: NSView {
     open var font: NSFont?
 
     /// Scrolling text color
-    open var textColor: NSColor = .orange
+    open var textColor: NSColor = .white
 
     /// Determines if the text should be delayed before starting scroll
     open var isDelayed: Bool = true
@@ -59,7 +59,7 @@ open class ScrollingTextView: NSView {
     private lazy var textFontAttributes: [NSAttributedString.Key: Any] = {
         return [
             NSAttributedString.Key.font: font ?? NSFont.systemFont(ofSize: 14),
-            NSAttributedString.Key.backgroundColor: (.blue as NSColor)
+            NSAttributedString.Key.backgroundColor: (NSColor.init(red: 0, green: 0, blue: 0, alpha: 0.3))
         ]
     }()
 

@@ -17,6 +17,7 @@ final class PubSub {
     var client = ScClient(url: "http://localhost:8000/socketcluster/")
     var fclient: ScClient? = nil
     var currentArtist: String = ""
+    private var artistTooEarly: String = ""
     public weak var delegate: PubSubDelegate!
 
     var onConnect = {
@@ -32,6 +33,9 @@ final class PubSub {
     func onAuthentication(client :ScClient, isAuthenticated : Bool?) {
         print("Authenticated is ", isAuthenticated! as Bool)
         fclient = client
+        if artistTooEarly.count > 0 {
+            subscribe(currentArtist: artistTooEarly)
+        }
     }
 
     var onSetAuthentication = {
@@ -40,8 +44,9 @@ final class PubSub {
     }
     
     func subscribe(currentArtist: String) {
+        artistTooEarly = currentArtist
         guard fclient != nil, currentArtist != self.currentArtist else {return}
-        
+        artistTooEarly = ""
         client.publish(channelName: "changeArtist", data: [
             "prevArtist": self.currentArtist,
             "currArtist": currentArtist

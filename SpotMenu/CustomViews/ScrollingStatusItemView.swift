@@ -32,7 +32,19 @@ class ScrollingStatusItemView: NSView {
         didSet {
             guard let text = text else { return }
             scrollingTextView.setup(string: text)
-            listenerCountTextView.setup(string: "🎧30043")
+
+            if iconImageView.image == nil {
+                lengthHandler?(scrollingTextView.stringSize.width + Constants.padding + listenerCountTextView.stringSize.width)
+            } else {
+                lengthHandler?(scrollingTextView.stringSize.width + Constants.iconSize + Constants.padding + listenerCountTextView.stringSize.width)
+            }
+        }
+    }
+    
+    var listenerCountText: String? {
+        didSet {
+            guard let listenerCountText = listenerCountText else { return }
+            listenerCountTextView.setup(string: "👂\(listenerCountText) ")
 
             if iconImageView.image == nil {
                 lengthHandler?(scrollingTextView.stringSize.width + Constants.padding + listenerCountTextView.stringSize.width)
@@ -46,7 +58,7 @@ class ScrollingStatusItemView: NSView {
                 listenerCountTextView.topAnchor.constraint(equalTo: topAnchor),
                 listenerCountTextView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
-            
+
             NSLayoutConstraint.activate([
                 listenerCountTextView.widthAnchor.constraint(equalToConstant: listenerCountTextView.stringSize.width),
                 listenerCountTextView.leftAnchor.constraint(equalTo: iconImageView.rightAnchor),
@@ -139,7 +151,7 @@ private extension ScrollingStatusItemView {
         
         listenerCountTextView.needsUpdateConstraints = true
         print("update \(listenerCountTextView.stringSize.width)")
-        
+//
         NSLayoutConstraint.activate([
             listenerCountTextView.leftAnchor.constraint(equalTo: iconImageView.rightAnchor),
             listenerCountTextView.topAnchor.constraint(equalTo: topAnchor),

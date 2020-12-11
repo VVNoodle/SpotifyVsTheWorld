@@ -107,12 +107,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             registerHotkey()
         }
         
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(didUpdateListenerCount),
-//            name: pubSubNotification,
-//            object: nil
-//        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didUpdateListenerCount),
+            name: pubSubNotification,
+            object: nil
+        )
         
         // execute background runner for PubSub. qos either background or utility
         let queue = DispatchQueue(label: "PubSub", qos: .background)
@@ -123,10 +123,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-//    func didUpdateListenerCount(_ listenerCount: AnyObject) {
-//        self.listenerCount = listenerCount
-//
-//    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func didUpdateListenerCount(notification: NSNotification) {
+        guard let listenerCount = notification.object else { return }
+        if listenerCount is Int {
+            print("right here \(listenerCount)")
+            self.scrollingStatusItemView.listenerCountText = String(listenerCount as! Int)
+        }
+    }
 
     func applicationWillTerminate(_: Notification) {
         // Insert code here to tear down your application
