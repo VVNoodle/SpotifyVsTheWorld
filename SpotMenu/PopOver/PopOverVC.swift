@@ -280,9 +280,8 @@ extension PopOverViewController: PubSubDelegate {
     @objc func didUpdateListenerCount(notification: NSNotification) {
         guard let listenerCount = notification.object else { return }
         print("listener count \(listenerCount)")
-        print("lister count type \(listenerCount is Int)")
-        if listenerCount is Int {
-            self.listenerCount.stringValue = String(listenerCount as! Int)
+        if listenerCount is String {
+            self.listenerCount.stringValue = (listenerCount as? String)!
         }
     }
 }

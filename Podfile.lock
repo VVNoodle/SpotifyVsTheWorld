@@ -1,5 +1,5 @@
 PODS:
-  - Fabric (1.8.2)
+  - Fabric (1.10.2)
   - FirebaseCore (6.10.4):
     - FirebaseCoreDiagnostics (~> 1.6)
     - GoogleUtilities/Environment (~> 6.7)
@@ -28,26 +28,22 @@ PODS:
     - GoogleUtilities/Environment
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
-  - HandyJSON (5.0.2)
-  - LoginServiceKit (2.0.2)
+  - LoginServiceKit (2.2.0)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.11)
-  - ScClient (2.0.1):
-    - HandyJSON (~> 5.0.1)
-    - Starscream (~> 3.1.1)
-  - Sparkle (1.21.2)
-  - Starscream (3.1.1)
+  - Sparkle (1.24.0)
+  - Starscream (4.0.4)
 
 DEPENDENCIES:
   - Fabric
   - FirebaseCrashlytics
   - LoginServiceKit (from `https://github.com/Clipy/LoginServiceKit.git`)
-  - ScClient
   - Sparkle
+  - Starscream
 
 SPEC REPOS:
   trunk:
@@ -58,10 +54,8 @@ SPEC REPOS:
     - FirebaseInstallations
     - GoogleDataTransport
     - GoogleUtilities
-    - HandyJSON
     - nanopb
     - PromisesObjC
-    - ScClient
     - Sparkle
     - Starscream
 
@@ -71,25 +65,23 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   LoginServiceKit:
-    :commit: 79c9d6d2cc25dc238e6044245bebdc8253a786f2
+    :commit: cf58b91b0ac247bd8bf5dccb5434ca60a930c1e1
     :git: https://github.com/Clipy/LoginServiceKit.git
 
 SPEC CHECKSUMS:
-  Fabric: d7d7820bb92eaf2c3fc36733f6e5ca9692d921e8
+  Fabric: ea977e3cd9c20425516d3dafd3bf8c941c51223f
   FirebaseCore: d3a978a3cfa3240bf7e4ba7d137fdf5b22b628ec
   FirebaseCoreDiagnostics: 770ac5958e1372ce67959ae4b4f31d8e127c3ac1
   FirebaseCrashlytics: 1a747c9cc084a24dc6d9511c991db1cd078154eb
   FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
-  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  LoginServiceKit: 5b4736234dc4cc96d786d8cd83e43b9ce5e7f1ca
+  LoginServiceKit: 3c86ce2f2bcd1e373326839d6d863d8a6a5915b4
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
-  ScClient: 94fdce493b8838dcff741d8e1467ed787f266c4c
-  Sparkle: 1678d4707e7665960c7d1b43aca125e6392d11c4
-  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  Sparkle: 270cd27377bf04e9c128af06e3a22d0f572d6ee3
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
-PODFILE CHECKSUM: 7039f5b52d19268a9364c36a192b8d5d3d85f24d
+PODFILE CHECKSUM: e46c138b455d8e9b8de751879f7a5e02c16c6986
 
 COCOAPODS: 1.10.0

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -79,10 +79,9 @@
 		64F112A821933CA400753E83 /* ScrollingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F112A621933ACB00753E83 /* ScrollingTextView.swift */; };
 		64F29A091F2E5F1100E48BBD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64F29A0B1F2E5F1100E48BBD /* Localizable.strings */; };
 		6A1FAA68E8A9BC439147C3A1 /* Pods_SpotifyVsTheWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01568881B2AD3E8A71E9D3CA /* Pods_SpotifyVsTheWorld.framework */; };
+		6F1CE267A16AB9E6059607B2 /* Pods_SpotifyVsTheWorldToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5389B22F8916D3E326D55435 /* Pods_SpotifyVsTheWorldToday.framework */; };
 		A678C6C2257DF23C002AA455 /* PubSub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A678C6C1257DF23C002AA455 /* PubSub.swift */; };
 		A6A973A2257ED43500C167C6 /* PopOverViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D35CD21F60A1DC00EB5D67 /* PopOverViewControllerExtension.swift */; };
-		A6A973B1257EDBE500C167C6 /* ScClient in Frameworks */ = {isa = PBXBuildFile; productRef = A6A973B0257EDBE500C167C6 /* ScClient */; };
-		A6A973CA257EE28C00C167C6 /* ScClient in Frameworks */ = {isa = PBXBuildFile; productRef = A6A973C9257EE28C00C167C6 /* ScClient */; };
 		A6A973CB257EE29600C167C6 /* PubSub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A678C6C1257DF23C002AA455 /* PubSub.swift */; };
 		A6BA9E472581B36A004F1FC3 /* ListenerCountTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BA9E462581B36A004F1FC3 /* ListenerCountTextView.swift */; };
 		DB2C500E2199F94000932042 /* ScrollingStatusItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C500D2199F94000932042 /* ScrollingStatusItemView.swift */; };
@@ -130,6 +129,7 @@
 
 /* Begin PBXFileReference section */
 		01568881B2AD3E8A71E9D3CA /* Pods_SpotifyVsTheWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyVsTheWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		15C44A711125CA02B087A71D /* Pods-SpotifyVsTheWorldToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyVsTheWorldToday.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotifyVsTheWorldToday/Pods-SpotifyVsTheWorldToday.release.xcconfig"; sourceTree = "<group>"; };
 		213324281D79801E0060D48C /* SpotifyVsTheWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyVsTheWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2133242B1D79801E0060D48C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2133242D1D79801E0060D48C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -137,6 +137,7 @@
 		213324381D79967B0060D48C /* PopOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverVC.swift; sourceTree = "<group>"; };
 		2133243E1D7999180060D48C /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		5325CBE9807E5B7BDCB8234D /* Pods_SpotMenuToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotMenuToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5389B22F8916D3E326D55435 /* Pods_SpotifyVsTheWorldToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyVsTheWorldToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF4E837CD8EF8A8987E860D /* Pods-SpotMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotMenu.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotMenu/Pods-SpotMenu.release.xcconfig"; sourceTree = "<group>"; };
 		64055EDA1F766E3C00B07FB2 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		641226DF1FD414E500BB119F /* AboutPreferencesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPreferencesVC.swift; sourceTree = "<group>"; };
@@ -228,6 +229,7 @@
 		7C98D3E4B5FD3F16A6043A0A /* Pods-SpotifyVsTheWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyVsTheWorld.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotifyVsTheWorld/Pods-SpotifyVsTheWorld.debug.xcconfig"; sourceTree = "<group>"; };
 		A678C6C1257DF23C002AA455 /* PubSub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubSub.swift; sourceTree = "<group>"; };
 		A6BA9E462581B36A004F1FC3 /* ListenerCountTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerCountTextView.swift; sourceTree = "<group>"; };
+		B6F00D26BB7CBBF225044D43 /* Pods-SpotifyVsTheWorldToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyVsTheWorldToday.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotifyVsTheWorldToday/Pods-SpotifyVsTheWorldToday.debug.xcconfig"; sourceTree = "<group>"; };
 		DB2C500D2199F94000932042 /* ScrollingStatusItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingStatusItemView.swift; sourceTree = "<group>"; };
 		E2D35CCD1F60879700EB5D67 /* NSViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSViewExtension.swift; sourceTree = "<group>"; };
 		E2D35CD21F60A1DC00EB5D67 /* PopOverViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -238,7 +240,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A973B1257EDBE500C167C6 /* ScClient in Frameworks */,
 				648C81771FDDA1DE008F0F9F /* MusicPlayer.framework in Frameworks */,
 				6A1FAA68E8A9BC439147C3A1 /* Pods_SpotifyVsTheWorld.framework in Frameworks */,
 			);
@@ -248,9 +249,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A973CA257EE28C00C167C6 /* ScClient in Frameworks */,
 				64D5BEAA1FDC8E4D00AE5C99 /* MusicPlayer.framework in Frameworks */,
 				64185C0E1F1B8DC400CA23A0 /* NotificationCenter.framework in Frameworks */,
+				6F1CE267A16AB9E6059607B2 /* Pods_SpotifyVsTheWorldToday.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +592,7 @@
 				64185C0D1F1B8DC400CA23A0 /* NotificationCenter.framework */,
 				5325CBE9807E5B7BDCB8234D /* Pods_SpotMenuToday.framework */,
 				01568881B2AD3E8A71E9D3CA /* Pods_SpotifyVsTheWorld.framework */,
+				5389B22F8916D3E326D55435 /* Pods_SpotifyVsTheWorldToday.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -610,6 +612,8 @@
 				5DF4E837CD8EF8A8987E860D /* Pods-SpotMenu.release.xcconfig */,
 				7C98D3E4B5FD3F16A6043A0A /* Pods-SpotifyVsTheWorld.debug.xcconfig */,
 				65157A5FD39136F0B772BDC7 /* Pods-SpotifyVsTheWorld.release.xcconfig */,
+				B6F00D26BB7CBBF225044D43 /* Pods-SpotifyVsTheWorldToday.debug.xcconfig */,
+				15C44A711125CA02B087A71D /* Pods-SpotifyVsTheWorldToday.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -648,8 +652,8 @@
 				213324251D79801E0060D48C /* Frameworks */,
 				213324261D79801E0060D48C /* Resources */,
 				210C64531D7EB3E4001318FF /* Embed Frameworks */,
-				F8E0917400630BBF5370A313 /* [CP] Embed Pods Frameworks */,
 				64185C211F1B8DC400CA23A0 /* Embed App Extensions */,
+				5E9DF4CB44B145AB254D03D2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -657,9 +661,6 @@
 				64185C1C1F1B8DC400CA23A0 /* PBXTargetDependency */,
 			);
 			name = SpotifyVsTheWorld;
-			packageProductDependencies = (
-				A6A973B0257EDBE500C167C6 /* ScClient */,
-			);
 			productName = SpotMenu;
 			productReference = 213324281D79801E0060D48C /* SpotifyVsTheWorld.app */;
 			productType = "com.apple.product-type.application";
@@ -668,6 +669,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 64185C201F1B8DC400CA23A0 /* Build configuration list for PBXNativeTarget "SpotifyVsTheWorldToday" */;
 			buildPhases = (
+				C3CBD65DA95A6565761188D8 /* [CP] Check Pods Manifest.lock */,
 				64185C081F1B8DC400CA23A0 /* Sources */,
 				64185C091F1B8DC400CA23A0 /* Frameworks */,
 				64185C0A1F1B8DC400CA23A0 /* Resources */,
@@ -677,9 +679,6 @@
 			dependencies = (
 			);
 			name = SpotifyVsTheWorldToday;
-			packageProductDependencies = (
-				A6A973C9257EE28C00C167C6 /* ScClient */,
-			);
 			productName = SpotMenuToday;
 			productReference = 64185C0C1F1B8DC400CA23A0 /* SpotifyVsTheWorldToday.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -759,9 +758,6 @@
 				ru,
 			);
 			mainGroup = 2133241F1D79801E0060D48C;
-			packageReferences = (
-				A6A973AF257EDBE500C167C6 /* XCRemoteSwiftPackageReference "socketcluster-client-swift" */,
-			);
 			productRefGroup = 213324291D79801E0060D48C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -812,6 +808,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5E9DF4CB44B145AB254D03D2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpotifyVsTheWorld/Pods-SpotifyVsTheWorld-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/LoginServiceKit/LoginServiceKit.framework",
+				"${PODS_ROOT}/Sparkle/Sparkle.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LoginServiceKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpotifyVsTheWorld/Pods-SpotifyVsTheWorld-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		BCC3DC66AF67FE7C48F9B35A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -830,36 +848,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F8E0917400630BBF5370A313 /* [CP] Embed Pods Frameworks */ = {
+		C3CBD65DA95A6565761188D8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SpotifyVsTheWorld/Pods-SpotifyVsTheWorld-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/LoginServiceKit/LoginServiceKit.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/ScClient/ScClient.framework",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			inputFileListPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LoginServiceKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"$(DERIVED_FILE_DIR)/Pods-SpotifyVsTheWorldToday-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpotifyVsTheWorld/Pods-SpotifyVsTheWorld-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1039,6 +1047,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1088,9 +1097,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1098,7 +1107,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7C98D3E4B5FD3F16A6043A0A /* Pods-SpotifyVsTheWorld.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SpotMenu/SpotMenu.entitlements;
@@ -1107,10 +1116,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = JSD7G4PF3G;
 				INFOPLIST_FILE = SpotMenu/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.VVNoodle.SpotifyVsTheWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1125,7 +1131,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 65157A5FD39136F0B772BDC7 /* Pods-SpotifyVsTheWorld.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SpotMenu/SpotMenu.entitlements;
@@ -1134,10 +1140,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = JSD7G4PF3G;
 				INFOPLIST_FILE = SpotMenu/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.VVNoodle.SpotifyVsTheWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1149,6 +1152,7 @@
 		};
 		64185C1E1F1B8DC400CA23A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6F00D26BB7CBBF225044D43 /* Pods-SpotifyVsTheWorldToday.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1159,11 +1163,7 @@
 				DEVELOPMENT_TEAM = JSD7G4PF3G;
 				DevelopmentTeam = 3K79XCJYWL;
 				INFOPLIST_FILE = SpotMenuToday/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.VVNoodle.SpotifyVsTheWorld.SpotMenuToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1177,6 +1177,7 @@
 		};
 		64185C1F1F1B8DC400CA23A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15C44A711125CA02B087A71D /* Pods-SpotifyVsTheWorldToday.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1187,11 +1188,7 @@
 				DEVELOPMENT_TEAM = JSD7G4PF3G;
 				DevelopmentTeam = 3K79XCJYWL;
 				INFOPLIST_FILE = SpotMenuToday/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.VVNoodle.SpotifyVsTheWorld.SpotMenuToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1223,11 +1220,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.VVNoodle.MusicPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1261,11 +1254,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.VVNoodle.MusicPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1316,30 +1305,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		A6A973AF257EDBE500C167C6 /* XCRemoteSwiftPackageReference "socketcluster-client-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:sacOO7/socketcluster-client-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		A6A973B0257EDBE500C167C6 /* ScClient */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A6A973AF257EDBE500C167C6 /* XCRemoteSwiftPackageReference "socketcluster-client-swift" */;
-			productName = ScClient;
-		};
-		A6A973C9257EE28C00C167C6 /* ScClient */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A6A973AF257EDBE500C167C6 /* XCRemoteSwiftPackageReference "socketcluster-client-swift" */;
-			productName = ScClient;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 213324201D79801E0060D48C /* Project object */;
 }

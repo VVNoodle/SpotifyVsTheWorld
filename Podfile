@@ -6,5 +6,9 @@ target 'SpotifyVsTheWorld' do
     pod 'FirebaseCrashlytics'
     pod 'Sparkle'
     pod 'LoginServiceKit', :git => 'https://github.com/Clipy/LoginServiceKit.git'
-    pod 'ScClient'
+    pod 'Starscream'
+end
+
+target 'SpotifyVsTheWorldToday' do
+    pod 'Starscream'
 end

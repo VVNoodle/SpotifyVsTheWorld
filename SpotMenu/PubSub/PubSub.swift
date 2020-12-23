@@ -6,95 +6,133 @@
 //  Copyright © 2020 KM. All rights reserved.
 //
 
-import Foundation
-import ScClient
+import Starscream
 
 public protocol PubSubDelegate: class {
     func didUpdateListenerCount(notification: NSNotification) -> Void
 }
 
-final class PubSub {
-    var client = ScClient(url: "http://localhost:8000/socketcluster/")
-    var fclient: ScClient? = nil
+final class PubSub: WebSocketDelegate {
     var currentArtist: String = ""
     private var artistTooEarly: String = ""
     public weak var delegate: PubSubDelegate!
-
-    var onConnect = {
-        (client :ScClient) in
-        print("Connnected to server")
-    }
-
-    var onDisconnect = {
-        (client :ScClient, error : Error?) in
-        print("Disconnected from server")
-    }
-
-    func onAuthentication(client :ScClient, isAuthenticated : Bool?) {
-        print("Authenticated is ", isAuthenticated! as Bool)
-        fclient = client
-        if artistTooEarly.count > 0 {
-            subscribe(currentArtist: artistTooEarly)
+    private var socket: WebSocket?
+    private var isConnected: Bool = false
+    private var isConnecting: Bool = false
+    private var idleTimer : Timer?
+    private var pubSubUrl = ProcessInfo.processInfo.environment["PUBSUB_URL"]
+    
+    func didReceive(event: WebSocketEvent, client: WebSocket) {
+            switch event {
+            case .connected(_):
+                isConnected = true
+                isConnecting = false
+                print("Client connected to websocket")
+                if artistTooEarly.count > 0 {
+                    print("Subs attempt too early. Subing now. artist: \(artistTooEarly)")
+                    subscribe(currentArtist: artistTooEarly)
+                    artistTooEarly = ""
+                }
+            case .disconnected(let reason, let code):
+                isConnected = false
+                isConnecting = false
+                print("Websocket is disconnected: \(reason) with code: \(code)")
+            case .text(let string):
+                print ("Received text. Listener Count: \(string)")
+                DispatchQueue.main.async {
+                    let name = Notification.Name(rawValue: "PubSub")
+                    NotificationCenter.default.post(name: name, object: (string as AnyObject))
+                }
+            case .binary(let data):
+                print("Received data: \(data.count)")
+            case .ping(_):
+                print("ping")
+                break
+            case .pong(_):
+                print("ping")
+                break
+            case .viabilityChanged(_):
+                break
+            case .reconnectSuggested(_):
+                break
+            case .cancelled:
+                isConnected = false
+                isConnecting = false
+                print("Cancelled connection")
+            case .error(let error):
+                isConnected = false
+                if let error = error {
+                    handleError(error: error)
+                }
+            }
         }
+
+    
+    func formatChannelName(rawChannelName: String) -> String {
+        return rawChannelName.lowercased().replacingOccurrences(of: " ", with: "_")
+    }
+    
+    let queue = DispatchQueue(label: "PubSub", qos: .background)
+    
+    var task: DispatchWorkItem?
+    
+    @objc func disconnect() {
+        print("Disconnecting")
+        self.socket!.forceDisconnect()
     }
 
-    var onSetAuthentication = {
-        (client : ScClient, token : String?) in
-        print("Token is ", token! as String)
+   func startTimer () {
+        task?.cancel()
+        task = DispatchWorkItem { self.disconnect() }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (15 * 60), execute: task!)
+        print("Creating timer")
     }
+
     
     func subscribe(currentArtist: String) {
         artistTooEarly = currentArtist
-        guard fclient != nil, currentArtist != self.currentArtist else {return}
+        guard let definedSocket = socket, isConnected else {
+            print("Socket undefined")
+            if isConnecting == false {
+                print("not connected. connecting back")
+                connect()
+            }
+            return
+        }
+        guard currentArtist != self.currentArtist else {
+            return
+        }
         artistTooEarly = ""
-        client.publish(channelName: "changeArtist", data: [
-            "prevArtist": self.currentArtist,
-            "currArtist": currentArtist
-        ] as AnyObject)
-        
-        
-        unsubscribe(artistName: self.currentArtist)
-        client.subscribeAck(channelName: currentArtist, ack : {
-            (channelName : String, error : AnyObject?, data : AnyObject?) in
-            if (error is NSNull) {
-             print("Successfully subscribed to channel ", channelName)
-            } else {
-             print("Got error while subscribing ", error! as AnyObject)
-            }
-         })
-
-        client.onChannel(channelName: currentArtist, ack: {
-            (channelName : String , data : AnyObject?) in
-            print ("Got data for channel", channelName, " object data is ", data! as AnyObject)
-            DispatchQueue.main.async {
-                let name = Notification.Name(rawValue: "PubSub")
-                NotificationCenter.default.post(name: name, object: (data! as AnyObject))
-            }
-        })
-        
+        definedSocket.write(string: "\(formatChannelName(rawChannelName: self.currentArtist)),\(formatChannelName(rawChannelName: currentArtist))")
         self.currentArtist = currentArtist
+        print("Subbed to \(self.currentArtist)")
+        startTimer()
     }
     
-    func unsubscribe(artistName: String) {
-        guard artistName != "" else {return}
-        fclient!.unsubscribeAck(channelName: artistName, ack : {
-            (channelName : String, error : AnyObject?, data : AnyObject?) in
-            if (error is NSNull) {
-                print("Successfully unsubscribed to channel ", channelName)
-            } else {
-                print("Got error while unsubscribing ", error! as AnyObject)
-            }
-        })
+    func connect() {
+        guard let pubsubUrl = pubSubUrl else {return}
+        
+        let request = URLRequest(url: URL(string: "ws://\(pubsubUrl)/api/websocket")!)
+        socket = WebSocket(request: request)
+        
+        socket!.delegate = self
+        socket!.connect()
+        self.isConnecting = true
     }
     
     init() {
+        print("running pubsub!")
+        connect()
     }
     
-    func runPubSub() {
-        print("running pubsub!")
-        client.setBasicListener(onConnect: onConnect, onConnectError: nil, onDisconnect: onDisconnect)
-        client.setAuthenticationListener(onSetAuthentication: onSetAuthentication, onAuthentication: onAuthentication)
-        client.connect()
+    func handleError(error: Any) {
+        print("error \(error)")
+    }
+    
+    deinit {
+        guard let definedSocket = socket else {return}
+        definedSocket.disconnect()
+        definedSocket.delegate = nil
     }
 }
 

@@ -67,7 +67,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     
-    private let pubsub = PubSub()
+    private var pubsub: PubSub!
 //    private var listenerCount: AnyObject = 0 as AnyObject
 
     // MARK: - AppDelegate methods
@@ -113,13 +113,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             name: pubSubNotification,
             object: nil
         )
-        
+    }
+    
+    override init() {
+        super.init()
         // execute background runner for PubSub. qos either background or utility
         let queue = DispatchQueue(label: "PubSub", qos: .background)
 
         queue.async { [weak self] in
             guard let self = self else { return }
-            self.pubsub.runPubSub()
+            self.pubsub = PubSub()
         }
     }
     
@@ -129,9 +132,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func didUpdateListenerCount(notification: NSNotification) {
         guard let listenerCount = notification.object else { return }
-        if listenerCount is Int {
-            print("right here \(listenerCount)")
-            self.scrollingStatusItemView.listenerCountText = String(listenerCount as! Int)
+        
+        if listenerCount is String {
+            self.scrollingStatusItemView.listenerCountText = listenerCount as? String
         }
     }
 
@@ -240,14 +243,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .showArtist(v: UserPreferences.showArtist)
             .showPlayingIcon(v: UserPreferences.showPlayingIcon)
             .getString()
+        
+        
+        // execute background runner for PubSub. qos either background or utility
+        let queue = DispatchQueue(label: "PubSub", qos: .background)
+        
         if lastStatusTitle != statusItemTitle {
             updateTitle(newTitle: statusItemTitle)
             
             guard let artistName = musicPlayerManager.currentPlayer?.currentTrack?.artist else { return }
             
-            // execute background runner for PubSub. qos either background or utility
-            let queue = DispatchQueue(label: "PubSub", qos: .background)
-
             queue.async { [weak self] in
                 guard let self = self else { return }
                 self.pubsub.subscribe(currentArtist: artistName)
@@ -330,6 +335,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func updateTitle(newTitle: String) {
         scrollingStatusItemView.icon = chooseIcon(musicPlayerName: musicPlayerManager.currentPlayer?.name)
         scrollingStatusItemView.text = newTitle
+        if newTitle.count == 0 {
+            self.scrollingStatusItemView.listenerCountText = ""
+        }
 
         lastStatusTitle = newTitle
 
