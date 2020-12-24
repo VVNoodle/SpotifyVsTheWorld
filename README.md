@@ -2,6 +2,8 @@
 
 This is like Twitch/Youtube live viewer count, but for Spotify/Apple Music. Available for MacOS
 
+Server repo: https://github.com/VVNoodle/SpotifyVsTheWorld-server
+
 ## How to Use?
 
 **P.S This is still a work in progress and is not downloadable. star/watch this repo for updates.**
@@ -17,7 +19,7 @@ This is like Twitch/Youtube live viewer count, but for Spotify/Apple Music. Avai
 ![SpotifyVsTheWorld](https://i.ibb.co/Sr8R1XY/Spotify-Vs-The-World.png)
 
 1. Client establishes a websocket connection to Fanout Cloud, a publish/subscribe proxy
-2. Fanout Cloud connects to an origin server, in this case an EC2 server using a [Websocket-over-HTTPS protocol](<https://docs.fanout.io/docs/websockets[Websocket-over-HTTPS> protocol "Websocket-over-HTTPS protocol").
+2. Fanout Cloud connects to an origin server, in this case an EC2 server using a [Websocket-over-HTTPS protocol](https://docs.fanout.io/docs/websockets[Websocket-over-HTTPS).
 3. When Client listens to music...
    - Send a subscribe request for the artist being listened to
    - Send an unsubscribe request for the previous artist
@@ -33,7 +35,7 @@ This is like Twitch/Youtube live viewer count, but for Spotify/Apple Music. Avai
 
 ## Why does this exist?
 
-It feels nice to notice some other users somewhere out there are listening to the same track youre listening to at the exact moment.
+Its cool to see some other users somewhere in the globe listening to the same track youre listening to at the *exact* moment.
 
 ## Future plans
 
