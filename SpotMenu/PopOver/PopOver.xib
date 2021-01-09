@@ -151,12 +151,12 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="agO-HB-Ns6">
-                            <rect key="frame" x="252" y="268" width="37" height="16"/>
+                            <rect key="frame" x="203" y="274" width="91" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="IMQ-cN-P0J">
+                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="no connection" drawsBackground="YES" id="IMQ-cN-P0J">
                                 <font key="font" metaFont="system"/>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="textColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                     </subviews>

@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.9.1)
   - Fabric (1.10.2)
   - FirebaseCore (6.10.4):
     - FirebaseCoreDiagnostics (~> 1.6)
@@ -28,25 +29,31 @@ PODS:
     - GoogleUtilities/Environment
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
+  - IKEventSource (3.0.1)
   - LoginServiceKit (2.2.0)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
-  - PromisesObjC (1.2.11)
+  - PromisesObjC (1.2.12)
   - Sparkle (1.24.0)
   - Starscream (4.0.4)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
+  - Alamofire
   - Fabric
   - FirebaseCrashlytics
+  - IKEventSource
   - LoginServiceKit (from `https://github.com/Clipy/LoginServiceKit.git`)
   - Sparkle
   - Starscream
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Fabric
     - FirebaseCore
     - FirebaseCoreDiagnostics
@@ -54,10 +61,12 @@ SPEC REPOS:
     - FirebaseInstallations
     - GoogleDataTransport
     - GoogleUtilities
+    - IKEventSource
     - nanopb
     - PromisesObjC
     - Sparkle
     - Starscream
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   LoginServiceKit:
@@ -69,6 +78,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/Clipy/LoginServiceKit.git
 
 SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Fabric: ea977e3cd9c20425516d3dafd3bf8c941c51223f
   FirebaseCore: d3a978a3cfa3240bf7e4ba7d137fdf5b22b628ec
   FirebaseCoreDiagnostics: 770ac5958e1372ce67959ae4b4f31d8e127c3ac1
@@ -76,12 +86,14 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
+  IKEventSource: ababa323587c6b0c250dd54d4a48ab68fd845e8e
   LoginServiceKit: 3c86ce2f2bcd1e373326839d6d863d8a6a5915b4
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
-  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Sparkle: 270cd27377bf04e9c128af06e3a22d0f572d6ee3
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: e46c138b455d8e9b8de751879f7a5e02c16c6986
+PODFILE CHECKSUM: 487fecc16eb6d442a828925b43d6bad1b57e3c32
 
 COCOAPODS: 1.10.0

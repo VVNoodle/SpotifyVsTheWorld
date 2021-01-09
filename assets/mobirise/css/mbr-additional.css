@@ -1,9 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i);
 
-
-
-
-
 body {
   font-style: normal;
   line-height: 1.5;
@@ -20,35 +16,35 @@ body {
   line-height: 1.6;
 }
 .display-1 {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 4.25rem;
 }
 .display-1 > .mbr-iconfont {
   font-size: 6.8rem;
 }
 .display-2 {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 3rem;
 }
 .display-2 > .mbr-iconfont {
   font-size: 4.8rem;
 }
 .display-4 {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 1rem;
 }
 .display-4 > .mbr-iconfont {
   font-size: 1.6rem;
 }
 .display-5 {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 1.5rem;
 }
 .display-5 > .mbr-iconfont {
   font-size: 2.4rem;
 }
 .display-7 {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 1rem;
 }
 .display-7 > .mbr-iconfont {
@@ -62,23 +58,36 @@ body {
 @media (max-width: 768px) {
   .display-1 {
     font-size: 3.4rem;
-    font-size: calc( 2.1374999999999997rem + (4.25 - 2.1374999999999997) * ((100vw - 20rem) / (48 - 20)));
-    line-height: calc( 1.4 * (2.1374999999999997rem + (4.25 - 2.1374999999999997) * ((100vw - 20rem) / (48 - 20))));
+    font-size: calc(
+      2.1374999999999997rem + (4.25 - 2.1374999999999997) *
+        ((100vw - 20rem) / (48 - 20))
+    );
+    line-height: calc(
+      1.4 *
+        (
+          2.1374999999999997rem + (4.25 - 2.1374999999999997) *
+            ((100vw - 20rem) / (48 - 20))
+        )
+    );
   }
   .display-2 {
     font-size: 2.4rem;
-    font-size: calc( 1.7rem + (3 - 1.7) * ((100vw - 20rem) / (48 - 20)));
-    line-height: calc( 1.4 * (1.7rem + (3 - 1.7) * ((100vw - 20rem) / (48 - 20))));
+    font-size: calc(1.7rem + (3 - 1.7) * ((100vw - 20rem) / (48 - 20)));
+    line-height: calc(
+      1.4 * (1.7rem + (3 - 1.7) * ((100vw - 20rem) / (48 - 20)))
+    );
   }
   .display-4 {
     font-size: 0.8rem;
-    font-size: calc( 1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20)));
-    line-height: calc( 1.4 * (1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20))));
+    font-size: calc(1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20)));
+    line-height: calc(1.4 * (1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20))));
   }
   .display-5 {
     font-size: 1.2rem;
-    font-size: calc( 1.175rem + (1.5 - 1.175) * ((100vw - 20rem) / (48 - 20)));
-    line-height: calc( 1.4 * (1.175rem + (1.5 - 1.175) * ((100vw - 20rem) / (48 - 20))));
+    font-size: calc(1.175rem + (1.5 - 1.175) * ((100vw - 20rem) / (48 - 20)));
+    line-height: calc(
+      1.4 * (1.175rem + (1.5 - 1.175) * ((100vw - 20rem) / (48 - 20)))
+    );
   }
 }
 /* Buttons */
@@ -87,7 +96,7 @@ body {
   border-width: 2px;
   font-style: normal;
   letter-spacing: 1px;
-  margin: .4rem .8rem;
+  margin: 0.4rem 0.8rem;
   white-space: normal;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -111,7 +120,7 @@ body {
 .btn-md {
   font-weight: 500;
   letter-spacing: 1px;
-  margin: .4rem .8rem !important;
+  margin: 0.4rem 0.8rem !important;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -121,7 +130,7 @@ body {
 .btn-lg {
   font-weight: 500;
   letter-spacing: 1px;
-  margin: .4rem .8rem !important;
+  margin: 0.4rem 0.8rem !important;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -583,7 +592,7 @@ a:hover {
   opacity: 0 !important;
 }
 #scrollToTop a i:before {
-  content: '';
+  content: "";
   position: absolute;
   height: 40%;
   top: 25%;
@@ -592,7 +601,7 @@ a:hover {
   left: calc(50% - 1px);
 }
 #scrollToTop a i:after {
-  content: '';
+  content: "";
   position: absolute;
   display: block;
   border-top: 2px solid #fff;
@@ -604,7 +613,7 @@ a:hover {
   transform: rotate(135deg);
 }
 /* Others*/
-.note-check a[data-value=Rubik] {
+.note-check a[data-value="Rubik"] {
   font-style: normal;
 }
 .mbr-arrow a {
@@ -618,14 +627,14 @@ a:hover {
 .form-control-label {
   position: relative;
   cursor: pointer;
-  margin-bottom: .357em;
+  margin-bottom: 0.357em;
   padding: 0;
 }
 .alert {
   color: #ffffff;
   border-radius: 0;
   border: 0;
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.875rem;
   padding: 1.25rem;
@@ -647,11 +656,11 @@ a:hover {
   background-color: #f5f5f5;
   box-shadow: none;
   color: #565656;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 1rem;
   line-height: 1.43;
   min-height: 3.5em;
-  padding: 1.07em .5em;
+  padding: 1.07em 0.5em;
 }
 .form-control > .mbr-iconfont {
   font-size: 1.6rem;
@@ -667,7 +676,7 @@ a:hover {
   background-color: #000;
   bottom: 0;
   left: 0;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   right: 0;
   top: 0;
@@ -706,7 +715,7 @@ pre {
 }
 /* Forms */
 .mbr-form .btn {
-  margin: .4rem 0;
+  margin: 0.4rem 0;
 }
 .mbr-form .input-group-btn a.btn {
   border-radius: 100px !important;
@@ -749,7 +758,7 @@ pre {
 }
 @media (max-width: 767px) {
   .btn {
-    font-size: .75rem !important;
+    font-size: 0.75rem !important;
   }
   .btn .mbr-iconfont {
     font-size: 1rem !important;
@@ -780,7 +789,7 @@ pre {
   background: #149dcc;
 }
 .btn-social + .btn {
-  margin-left: .1rem;
+  margin-left: 0.1rem;
 }
 /* Footer */
 .mbr-footer-content li::before,
@@ -1077,8 +1086,8 @@ pre {
     flex-direction: row;
   }
   .navbar-toggleable .navbar-nav .nav-link {
-    padding-right: .5rem;
-    padding-left: .5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
   }
   .navbar-toggleable > .container {
     display: -webkit-box;
@@ -1137,8 +1146,8 @@ pre {
     flex-direction: row;
   }
   .navbar-toggleable-sm .navbar-nav .nav-link {
-    padding-right: .5rem;
-    padding-left: .5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
   }
   .navbar-toggleable-sm > .container {
     display: -webkit-box;
@@ -1197,8 +1206,8 @@ pre {
     flex-direction: row;
   }
   .navbar-toggleable-md .navbar-nav .nav-link {
-    padding-right: .5rem;
-    padding-left: .5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
   }
   .navbar-toggleable-md > .container {
     display: -webkit-box;
@@ -1257,8 +1266,8 @@ pre {
     flex-direction: row;
   }
   .navbar-toggleable-lg .navbar-nav .nav-link {
-    padding-right: .5rem;
-    padding-left: .5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
   }
   .navbar-toggleable-lg > .container {
     display: -webkit-box;
@@ -1314,8 +1323,8 @@ pre {
   flex-direction: row;
 }
 .navbar-toggleable-xl .navbar-nav .nav-link {
-  padding-right: .5rem;
-  padding-left: .5rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
 }
 .navbar-toggleable-xl > .container {
   display: -webkit-box;
@@ -1366,7 +1375,13 @@ body {
 .cid-qEX98yd8hu {
   padding-top: 60px;
   padding-bottom: 120px;
-  background-image: url("../../../assets/images/mbr-1-1620x1080.jpg");
+  background: rgb(82, 2, 2);
+  background: linear-gradient(
+    90deg,
+    rgba(82, 2, 2, 1) 0%,
+    rgba(121, 31, 9, 1) 35%,
+    rgba(163, 4, 13, 1) 100%
+  );
 }
 .cid-qEX98yd8hu .mbr-figure {
   margin: 0 auto;

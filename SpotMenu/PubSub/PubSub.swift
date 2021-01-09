@@ -4,69 +4,28 @@
 //
 //  Created by Egan Bisma on 12/6/20.
 //  Copyright © 2020 KM. All rights reserved.
-//
 
 import Starscream
+import IKEventSource
+import Alamofire
+import SwiftyJSON
 
 public protocol PubSubDelegate: class {
     func didUpdateListenerCount(notification: NSNotification) -> Void
 }
 
-final class PubSub: WebSocketDelegate {
+final class PubSub {
     var currentArtist: String = ""
-    private var artistTooEarly: String = ""
+    private var artistTooEarly: (String, TimeInterval) = ("", 0)
     public weak var delegate: PubSubDelegate!
-    private var socket: WebSocket?
-    private var isConnected: Bool = false
-    private var isConnecting: Bool = false
+    private var isTempDisconnect: Bool = false
     private var idleTimer : Timer?
     private var pubSubUrl = ProcessInfo.processInfo.environment["PUBSUB_URL"]
+    private let countNotification = Notification.Name(rawValue: "PubSub")
+    private let disconnectNotification = Notification.Name(rawValue: "PubSubDisconnect")
+    private let host = "https://nchan.spotifyvstheworld.com"
     
-    func didReceive(event: WebSocketEvent, client: WebSocket) {
-            switch event {
-            case .connected(_):
-                isConnected = true
-                isConnecting = false
-                print("Client connected to websocket")
-                if artistTooEarly.count > 0 {
-                    print("Subs attempt too early. Subing now. artist: \(artistTooEarly)")
-                    subscribe(currentArtist: artistTooEarly)
-                    artistTooEarly = ""
-                }
-            case .disconnected(let reason, let code):
-                isConnected = false
-                isConnecting = false
-                print("Websocket is disconnected: \(reason) with code: \(code)")
-            case .text(let string):
-                print ("Received text. Listener Count: \(string)")
-                DispatchQueue.main.async {
-                    let name = Notification.Name(rawValue: "PubSub")
-                    NotificationCenter.default.post(name: name, object: (string as AnyObject))
-                }
-            case .binary(let data):
-                print("Received data: \(data.count)")
-            case .ping(_):
-                print("ping")
-                break
-            case .pong(_):
-                print("ping")
-                break
-            case .viabilityChanged(_):
-                break
-            case .reconnectSuggested(_):
-                break
-            case .cancelled:
-                isConnected = false
-                isConnecting = false
-                print("Cancelled connection")
-            case .error(let error):
-                isConnected = false
-                if let error = error {
-                    handleError(error: error)
-                }
-            }
-        }
-
+    private var eventSourceSubscriber: EventSource!;
     
     func formatChannelName(rawChannelName: String) -> String {
         return rawChannelName.lowercased().replacingOccurrences(of: " ", with: "_")
@@ -76,53 +35,108 @@ final class PubSub: WebSocketDelegate {
     
     var task: DispatchWorkItem?
     
-    @objc func disconnect() {
-        print("Disconnecting")
-        self.socket!.forceDisconnect()
-    }
-
-   func startTimer () {
+    // disconnect websocket after 8 minutes + track minutes from now
+    func startTimer (duration: TimeInterval) {
         task?.cancel()
-        task = DispatchWorkItem { self.disconnect() }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (15 * 60), execute: task!)
+        task = DispatchWorkItem {
+            self.eventSourceSubscriber.disconnect()
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (8 * 60) + duration, execute: task!)
         print("Creating timer")
     }
-
     
-    func subscribe(currentArtist: String) {
-        artistTooEarly = currentArtist
-        guard let definedSocket = socket, isConnected else {
-            print("Socket undefined")
-            if isConnecting == false {
-                print("not connected. connecting back")
-                connect()
-            }
-            return
-        }
+    
+    func subscribe(currentArtist: String, duration: TimeInterval) {
+        startTimer(duration: duration)
         guard currentArtist != self.currentArtist else {
             return
         }
-        artistTooEarly = ""
-        definedSocket.write(string: "\(formatChannelName(rawChannelName: self.currentArtist)),\(formatChannelName(rawChannelName: currentArtist))")
+        let formattedArtistName = formatChannelName(rawChannelName: currentArtist)
+        
+        // get subscribers count
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+        request("\(host)/pub/\(formattedArtistName)", method: .get, headers: headers).responseJSON { response in
+            guard let data = response.data else {
+                return
+            }
+            let JSONData = JSON(data)
+            debugPrint("data \(JSONData["subscribers"].stringValue)")
+            
+            var count = JSONData["subscribers"].stringValue.count > 0 ? JSONData["subscribers"].stringValue : "0"
+            count = String(Int(count)! + 1)
+            let param = [
+                "c": count,
+            ]
+            debugPrint(param)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {return}
+                NotificationCenter.default.post(name: self.countNotification, object: (count as AnyObject))
+            }
+            
+            request(
+                "\(self.host)/pub/\(formattedArtistName)",
+                method: .post,
+                parameters: param,
+                headers: headers
+            ).responseJSON { [self] response in
+                if (eventSourceSubscriber != nil) {
+                    isTempDisconnect = true
+                    eventSourceSubscriber.disconnect()
+                }
+                eventSourceSubscriber = EventSource(url: URL(string: "\(host)/sub/\(formattedArtistName)")!)
+                eventSourceSubscriber.connect()
+                eventSourceSubscriber.onOpen {
+                    print("connected to server!!!")
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else {return}
+                        NotificationCenter.default.post(name: self.disconnectNotification, object: true)
+                    }
+                }
+                eventSourceSubscriber.onMessage({ id, event, data in
+                    guard let data = data else {
+                        print("no data found")
+                        return
+                    }
+                    
+                    //extract listener count from rest of body (e.g. c=3 -> 3)
+                    guard let range = data.range(of: "=") else {
+                        return
+                    }
+                    var count = data[range.upperBound...]
+                    if (count.count == 0) {
+                        count = "0"
+                    }
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else {return}
+                        NotificationCenter.default.post(name: self.countNotification, object: (count as AnyObject))
+                    }
+                })
+                eventSourceSubscriber.onComplete({ id, bl, err in
+                    print("EventSource connection is disconnected: \(bl) with code: \(err)")
+                    if isTempDisconnect {
+                        isTempDisconnect = false
+                    } else {
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self else {return}
+                            NotificationCenter.default.post(name: self.disconnectNotification, object: false)
+                        }
+                    }
+                })
+            }
+        }
         self.currentArtist = currentArtist
         print("Subbed to \(self.currentArtist)")
-        startTimer()
+        
+        
     }
     
-    func connect() {
-        guard let pubsubUrl = pubSubUrl else {return}
-        
-        let request = URLRequest(url: URL(string: "ws://\(pubsubUrl)/api/websocket")!)
-        socket = WebSocket(request: request)
-        
-        socket!.delegate = self
-        socket!.connect()
-        self.isConnecting = true
-    }
     
     init() {
         print("running pubsub!")
-        connect()
     }
     
     func handleError(error: Any) {
@@ -130,9 +144,8 @@ final class PubSub: WebSocketDelegate {
     }
     
     deinit {
-        guard let definedSocket = socket else {return}
-        definedSocket.disconnect()
-        definedSocket.delegate = nil
+        guard let eventSourceSubscriber = eventSourceSubscriber else {return}
+        eventSourceSubscriber.disconnect()
     }
 }
 

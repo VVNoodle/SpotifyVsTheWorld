@@ -106,13 +106,7 @@ private extension ScrollingTextView {
 
         if stringSize.width > length {
             guard let speed = timerSpeed else { return }
-            if #available(OSX 10.12, *), isDelayed {
-                timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { [weak self] timer in
-                    self?.setSpeed(newInterval: speed)
-                })
-            } else {
                 setSpeed(newInterval: speed)
-            }
         } else {
             setSpeed(newInterval: 0.0)
         }

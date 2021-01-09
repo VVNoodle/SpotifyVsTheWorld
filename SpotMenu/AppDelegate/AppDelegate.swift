@@ -38,6 +38,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var removeHudTimer: Timer?
     private var musicPlayerManager: MusicPlayerManager!
     private let pubSubNotification = Notification.Name(rawValue: "PubSub")
+    private let pubSubDisconnectNotification = Notification.Name(rawValue: "PubSubDisconnect")
 
     private lazy var statusItem: NSStatusItem = {
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -106,7 +107,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if UserPreferences.keyboardShortcutEnabled {
             registerHotkey()
         }
-        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didUpdateWebsocketConnection),
+            name: pubSubDisconnectNotification,
+            object: nil
+        )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(didUpdateListenerCount),
@@ -137,6 +143,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             self.scrollingStatusItemView.listenerCountText = listenerCount as? String
         }
     }
+    
+    @objc func didUpdateWebsocketConnection(notification: NSNotification) {
+        guard let isConnected = notification.object as? Bool else { return }
+        
+        self.scrollingStatusItemView.isConnected = isConnected
+//        if isConnected == false {
+//            self.scrollingStatusItemView.textColor = .gray
+//        } else {
+//            self.scrollingStatusItemView.textColor = .yellow
+//        }
+    }
+
 
     func applicationWillTerminate(_: Notification) {
         // Insert code here to tear down your application
@@ -243,8 +261,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .showArtist(v: UserPreferences.showArtist)
             .showPlayingIcon(v: UserPreferences.showPlayingIcon)
             .getString()
-        
-        
+
         // execute background runner for PubSub. qos either background or utility
         let queue = DispatchQueue(label: "PubSub", qos: .background)
         
@@ -255,7 +272,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             
             queue.async { [weak self] in
                 guard let self = self else { return }
-                self.pubsub.subscribe(currentArtist: artistName)
+                self.pubsub.subscribe(currentArtist: artistName, duration: (self.musicPlayerManager.currentPlayer?.currentTrack!.duration)!)
             }
         }
     }

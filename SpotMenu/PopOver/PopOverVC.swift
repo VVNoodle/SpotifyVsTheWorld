@@ -279,7 +279,6 @@ extension PopOverViewController: MusicPlayerManagerDelegate {
 extension PopOverViewController: PubSubDelegate {
     @objc func didUpdateListenerCount(notification: NSNotification) {
         guard let listenerCount = notification.object else { return }
-        print("listener count \(listenerCount)")
         if listenerCount is String {
             self.listenerCount.stringValue = (listenerCount as? String)!
         }

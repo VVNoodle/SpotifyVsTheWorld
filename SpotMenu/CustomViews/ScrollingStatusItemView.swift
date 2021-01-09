@@ -46,10 +46,42 @@ class ScrollingStatusItemView: NSView {
     
     var listenerConstraint: NSLayoutConstraint?
     
+    var textColor: NSColor = .yellow {
+        didSet {
+            listenerCountTextView.textColor = textColor
+            listenerCountTextView.updateLayer()
+        }
+    }
+    
+    var isConnected: Bool = false {
+        didSet {
+            if isConnected == false {
+                listenerCountTextView.setup(string: "🔌")
+                listenerCountTextView.changeBackgroundColor()
+
+                if iconImageView.image == nil {
+                    lengthHandler?(scrollingTextView.stringSize.width + Constants.padding + listenerCountTextView.stringSize.width)
+                } else {
+                    lengthHandler?(scrollingTextView.stringSize.width + Constants.iconSize + Constants.padding + listenerCountTextView.stringSize.width)
+                }
+                
+                // may need to revisit this logic
+                if let listenerConstraint = self.listenerConstraint {
+                    NSLayoutConstraint.deactivate([listenerConstraint])
+                }
+                self.listenerConstraint = listenerCountTextView.widthAnchor.constraint(equalToConstant: listenerCountTextView.stringSize.width)
+                NSLayoutConstraint.activate([
+                    self.listenerConstraint!
+                ])
+            }
+        }
+    }
+    
     var listenerCountText: String? {
         didSet {
             guard let listenerCountText = listenerCountText else { return }
-            listenerCountTextView.setup(string: listenerCountText.count > 0 ? "👂\(listenerCountText) " : "-")
+            print("called with count \(listenerCountText)")
+            listenerCountTextView.setup(string: listenerCountText.count > 0 ? "👂\(listenerCountText) " : "")
 
             if iconImageView.image == nil {
                 lengthHandler?(scrollingTextView.stringSize.width + Constants.padding + listenerCountTextView.stringSize.width)
