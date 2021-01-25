@@ -16,10 +16,7 @@ public protocol PubSubDelegate: class {
 }
 
 final class PubSub: PubSubProtocol,WebSocketDelegate {
-    private var host: String {
-        let dictionary = ProcessInfo.processInfo.environment
-        return "wss://\(dictionary["PUBSUB_URL"] ?? "oops" )"
-    }
+    private let host: String = "wss://nchan.spotifyvstheworld.com"
     var currentArtist: String = ""
     private var artistTooEarly: (String, TimeInterval) = ("", 0)
     public weak var delegate: PubSubDelegate!
@@ -53,7 +50,7 @@ final class PubSub: PubSubProtocol,WebSocketDelegate {
             }
             socket!.write(string: "")
            case .disconnected(let reason, let code):
-               print("Websocket is disconnected: \(reason) with code: \(code)")
+               debugPrint("Websocket is disconnected: \(reason) with code: \(code)")
                lostConnection()
            case .text(let data):
                print ("Received text. Listener Count: \(data)")
@@ -70,19 +67,19 @@ final class PubSub: PubSubProtocol,WebSocketDelegate {
                     NotificationCenter.default.post(name: name, object: (count as AnyObject))
                 }
            case .binary(let data):
-               print("Received data: \(data.count)")
+               debugPrint("Received data: \(data.count)")
            case .ping(_):
-               print("ping")
+               debugPrint("ping")
                break
            case .pong(_):
-               print("ping")
+               debugPrint("ping")
                break
            case .viabilityChanged(_):
                break
            case .reconnectSuggested(_):
                break
            case .cancelled:
-               print("Cancelled connection")
+               debugPrint("Cancelled connection")
                 lostConnection()
            case .error(let error):
                if let error = error {
@@ -109,7 +106,7 @@ final class PubSub: PubSubProtocol,WebSocketDelegate {
     }
     
     func handleError(error: Any) {
-        print("error \(error)")
+        debugPrint("error \(error)")
     }
 
     init() {

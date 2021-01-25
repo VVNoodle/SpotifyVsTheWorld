@@ -26,8 +26,8 @@ final class StatusMenu {
             keyEquivalent: "I")
         )
         menu.addItem(NSMenuItem(
-            title: NSLocalizedString(" - kmikiy - ", comment: ""),
-            action: #selector(AppDelegate.openKmikiy(_:)),
+            title: NSLocalizedString(" - VVNoodle - ", comment: ""),
+            action: #selector(AppDelegate.openVVNoodle(_:)),
             keyEquivalent: "")
         )
         menu.addItem(NSMenuItem.separator())
