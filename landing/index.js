@@ -83,7 +83,7 @@ window.onload = async function () {
                 }
                 appendTable(data, zset[index + 1]);
             });
-            if (zset.length < 20) {
+            if (zset.length / 2 < 20) {
                 const emptyPadding = 40 - zset.length;
                 for (let i = 0; i < emptyPadding / 2; i++) {
                     appendTable(null, null, true);

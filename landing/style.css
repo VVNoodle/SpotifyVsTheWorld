@@ -1,6 +1,6 @@
 html {
   background-color: rgb(15, 17, 17);
-  color: rgb(252, 232, 249);
+  color: rgb(243, 252, 232);
 }
 body {
   height: 100vh;
@@ -13,7 +13,7 @@ body {
 
 #main-content {
   display: grid;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   width: 70vw;
   justify-items: center;
 }
@@ -22,14 +22,20 @@ table {
   border-spacing: 1px 0px;
 }
 
+a {
+  text-decoration: none;
+  color: rgb(222, 226, 217);
+}
+
 h1 {
   color: rgb(231, 231, 231);
   font-size: 3rem;
 }
 
 h2 {
-  color: rgb(226, 217, 217);
+  color: rgb(222, 226, 217);
   font-size: 1.5rem;
+  margin: 0;
 }
 
 #hero-section {
@@ -49,6 +55,7 @@ h2 {
 
 #title h2 {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 #title {
@@ -76,40 +83,34 @@ h2 {
   min-width: 100px;
 }
 
-
 .hero-button {
   margin-right: 0.5vw;
   padding: 0 0.5vw;
-  background-color: rgb(173, 53, 177);
+  background-color: rgb(208, 241, 57);
   border-radius: 3px;
   margin-bottom: 4vh;
   height: 100%;
 
-  box-shadow: 0 5px rgb(154, 125, 177);
+  box-shadow: 0 5px rgb(149, 175, 32);
 }
-
-/* .hero-button:first-child {
-  background-color: rgb(180, 32, 185);
-  font-weight: 700;
-} */
 
 .hero-button a {
   display: inline-block;
   cursor: pointer;
   width: 100%;
-  color: black;
+  color: rgb(32, 32, 32);
   text-align: center;
+  font-weight: 700;
   padding: 1vh 0;
 
   font-size: 1rem;
 
   text-decoration: none;
-  color: white;
 }
 
 .hero-button:hover {
   transform: translateY(2px);
-  box-shadow: 0 3px  rgb(154, 125, 177);
+  box-shadow: 0 3px rgb(149, 175, 32);
 }
 
 #leaderboard-toggle {
@@ -122,22 +123,44 @@ h2 {
   background-color: black;
   color: black;
   padding: 1vh 1vw;
-  border-radius: 8px;#
-  text-align: center;text-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-align
-  width: 100%;widthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidth
-  margin: 3px;marginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmargin
+  border-radius: 8px;
+  text-align: center;
+  margin: 3px;
 }
 
 #demo-section {
   display: flex;
   flex-direction: column;
-  margin-right: 2vw;
-  background-color: rgb(32, 32, 32);
-  border-radius: 8px;
-  border-width: 1.5px;
+  margin-bottom: 2vh;
+}
+
+#demo-section img {
+  width: 45vw;
+  border-color: rgb(114, 136, 15);
+  border-width: 1px;
   border-style: solid;
-  border-spacing: 0;
-  border-color: rgba(193, 218, 104, 0.5);
+}
+
+#demo-section img:not(:last-child) {
+  margin-bottom: 2vh;
+}
+
+#other-links {
+  display: flex;
+  text-decoration: underline;
+  margin: 1vh 0;
+}
+
+#other-links a:not(:last-child) {
+  margin-right: 2vw;
+}
+
+video {
+  height: 100%;
+  border-width: 3px;
+  border-color: rgb(180, 216, 18);
+  border-style: solid;
+  border-radius: 8px;
 }
 
 #how-it-looks {
@@ -163,7 +186,7 @@ h2 {
 #leaderboard-table {
   font-weight: 100;
   color: rgb(43, 43, 43);
-  min-width: 30vw;
+  min-width: 50vw;
 }
 
 #leaderboard-table th {
@@ -218,7 +241,7 @@ h2 {
   padding: 0.6rem;
   margin-top: 0.5vh;
   border-radius: 4px;
-  font-size: 1.3vh;
+  font-size: 1rem;
 
   text-align: center;
   cursor: pointer;
@@ -243,14 +266,6 @@ h2 {
   box-shadow: 0 7px #999;
 }
 
-video {
-  height: 100%;
-  border-width: 3px;
-  border-color: black;
-  border-style: solid;
-  border-radius: 8px;
-}
-
 #faq-section {
   display: flex;
   align-items: center;
@@ -267,7 +282,7 @@ video {
 #faq-section h2 {
   font-size: 2rem;
   text-decoration: underline;
-  color: rgb(255, 231, 255);
+  color: rgb(246, 255, 231);
 }
 
 #faq-section h3,
@@ -306,11 +321,11 @@ p {
   -ms-animation: 1s blink ease infinite;
   -o-animation: 1s blink ease infinite;
   animation: 1s blink ease infinite;
-  
 }
 
 @keyframes "blink" {
-  from, to {
+  from,
+  to {
     opacity: 0;
   }
   50% {
@@ -319,7 +334,8 @@ p {
 }
 
 @-moz-keyframes blink {
-  from, to {
+  from,
+  to {
     opacity: 0;
   }
   50% {
@@ -328,7 +344,8 @@ p {
 }
 
 @-webkit-keyframes "blink" {
-  from, to {
+  from,
+  to {
     opacity: 0;
   }
   50% {
@@ -337,7 +354,8 @@ p {
 }
 
 @-ms-keyframes "blink" {
-  from, to {
+  from,
+  to {
     opacity: 0;
   }
   50% {
@@ -346,7 +364,8 @@ p {
 }
 
 @-o-keyframes "blink" {
-  from, to {
+  from,
+  to {
     opacity: 0;
   }
   50% {
