@@ -123,9 +123,9 @@ h2 {
   color: black;
   padding: 1vh 1vw;
   border-radius: 8px;#
-  text-align: center;text-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-align
-  width: 100%;widthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidth
-  margin: 3px;marginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmargin
+  text-align: center;text-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-align
+  width: 100%;widthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidthwidth
+  margin: 3px;marginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmarginmargin
 }
 
 #demo-section {
@@ -298,4 +298,58 @@ p {
 
 .page-number:hover {
   background-color: rgb(180, 216, 18);
+}
+
+.blinking {
+  -webkit-animation: 1s blink ease infinite;
+  -moz-animation: 1s blink ease infinite;
+  -ms-animation: 1s blink ease infinite;
+  -o-animation: 1s blink ease infinite;
+  animation: 1s blink ease infinite;
+  
+}
+
+@keyframes "blink" {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes "blink" {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes "blink" {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes "blink" {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }

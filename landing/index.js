@@ -1,8 +1,10 @@
 /*jshint esversion: 8 */
-
 const MAX_NAME_LENGTH = 20;
-const leaderboardHourUrl = "https://server.spotifyvstheworld.com/leaderboard/last6Hours";
-const leaderboardAlltimeUrl = "https://server.spotifyvstheworld.com/leaderboard/alltime";
+const HOST = "https://server.spotifyvstheworld.com";
+const leaderboardHourUrl = `${HOST}/leaderboard/last6Hours`;
+const leaderboardAlltimeUrl = `${HOST}/leaderboard/alltime`;
+
+console.log = function () { }
 
 const leaderboardTableHeaders = `
             <tr>
@@ -13,7 +15,7 @@ const leaderboardTableHeaders = `
                     listeners
                 </th>
             </tr>
-        `
+        `;
 
 function appendTable(artistName, count, empty) {
     const tableRow = document.createElement("tr");
@@ -40,12 +42,35 @@ function appendTable(artistName, count, empty) {
 }
 
 window.onload = async function () {
-    const { alltime: leaderboardAlltimePages, hour: leaderboardHourPages } = await (await fetch("https://server.spotifyvstheworld.com/leaderboard/page_total")).json()
+    const { alltime: leaderboardAlltimePages, hour: leaderboardHourPages } = await (await fetch(`${HOST}/leaderboard/page_total`)).json();
     console.log(`pages: ${leaderboardAlltimePages}, ${leaderboardHourPages}`);
+    let isRealtimeTab = true;
 
     try {
-        let leaderboardHourZset = await (await fetch(`${leaderboardHourUrl}/0`)).json()
-        let leaderboardAlltimeZset = await (await fetch(`${leaderboardAlltimeUrl}/0`)).json()
+        let leaderboardHourZset = await (await fetch(`${leaderboardHourUrl}/0`)).json();
+        let leaderboardAlltimeZset = await (await fetch(`${leaderboardAlltimeUrl}/0`)).json();
+        let leaderboardRealtimeZset = leaderboardHourZset;
+
+        const createEventSource = () => {
+            // const eventSourceInitDict = { https: { rejectUnauthorized: true } };
+            const es = new EventSource(
+                `https://nchan.spotifyvstheworld.com/subraw/realtime`,
+                // eventSourceInitDict,
+            );
+            es.onmessage = (e) => {
+                if (isRealtimeTab) {
+                    console.log(`subscribers updated: ${e.data} ${(new Date()).getMilliseconds()}`);
+                    leaderboardRealtimeZset = e.data.split(",");
+                    console.log(leaderboardRealtimeZset);
+                    generateTable(leaderboardRealtimeZset);
+                }
+            };
+
+            es.onopen = async () => {
+                console.log(`subscribing to realtime leaderboard`);
+            };
+        };
+        createEventSource();
 
         async function generateTable(zset) {
             document.getElementById('leaderboard-table').innerHTML = leaderboardTableHeaders;
@@ -94,9 +119,10 @@ window.onload = async function () {
             }
         }
 
-        await generateTable(leaderboardAlltimeZset);
+        await generateTable(leaderboardRealtimeZset);
         const leaderboardLast6Hours = document.getElementById("leaderboard-last-6-hours")
-        const leaderboardAlltime = document.getElementById("leaderboard-alltime")
+        const leaderboardAlltime = document.getElementById("leaderboard-alltime");
+        const leaderboardRealtime = document.getElementById("leaderboard-realtime");
 
         function buttonClick(elementClicked, elementsUnclicked) {
             const PUSH_LENGTH = "3px";
@@ -130,37 +156,33 @@ window.onload = async function () {
         }
 
         leaderboardLast6Hours.onclick = async () => {
+            isRealtimeTab = false;
             buttonClick(leaderboardLast6Hours, [leaderboardAlltime,
-                // leaderboardRealtime
+                leaderboardRealtime
             ])
             generateTable(leaderboardHourZset);
             await generatePages(leaderboardHourPages, leaderboardHourUrl, leaderboardHourZset);
-        }
+        };
 
         leaderboardAlltime.onclick = async () => {
+            isRealtimeTab = false;
             buttonClick(leaderboardAlltime, [leaderboardLast6Hours,
-                // leaderboardRealtime
+                leaderboardRealtime
             ])
-            generateTable(leaderboardAlltimeZset)
+            generateTable(leaderboardAlltimeZset);
             await generatePages(leaderboardAlltimePages, leaderboardAlltimeUrl, leaderboardAlltimeZset);
-        }
+        };
 
-        // leaderboardRealtime.onclick = () => {
-        //     buttonClick(leaderboardRealtime, [leaderboardLast6Hours, leaderboardAlltime])
-        //     document.getElementById('leaderboard-table').innerHTML = leaderboardTableHeaders;
+        leaderboardRealtime.onclick = async () => {
+            isRealtimeTab = true;
+            buttonClick(leaderboardRealtime, [leaderboardLast6Hours, leaderboardAlltime]);
+            generateTable(leaderboardRealtimeZset);
+        };
 
-        //     leaderboardAlltimeZset.forEach((data, index) => {
-        //         // if index is odd, then data is listener count
-        //         // else data is artist name
-        //         const isCount = index % 2 != 0;
-        //         if (isCount) {
-        //             return;
-        //         }
-        //         appendTable(data, leaderboardAlltimeZset[index + 1]);
-        //     });
-        // }
+        leaderboardRealtime.click();
 
-        leaderboardAlltime.click();
+
+
     } catch (error) {
         console.log(error.message);
         console.log(`error::: ${JSON.stringify(error, null, 4)}`);
