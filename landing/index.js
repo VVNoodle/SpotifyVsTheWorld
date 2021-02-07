@@ -33,7 +33,7 @@ window.onload = async function () {
             es.onmessage = (e) => {
                 const newZset = JSON.parse(e.data);
                 if (isRealtimeTab) {
-                    generateTable(newZset, 0, false);
+                    generateTable(newZset, 0, false, leaderboardRealtimeZset);
                 }
                 leaderboardRealtimeZset = newZset;
             };

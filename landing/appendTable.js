@@ -15,8 +15,12 @@ const getEquivalentRank = (rank) => {
     return rankNum;
 }
 
-export function appendTable(artistName, rank, count, empty, artistMetadata = null, past = true) {
-    const formattedArtistName = empty ? "" : artistName.replaceAll(/[^\w\s]/gi, '').replaceAll(" ", "_");
+function formatArtistName(artistName) {
+    return artistName.replaceAll(/[^\w\s]/gi, '').replaceAll(" ", "_")
+}
+
+export function appendTable(artistName, rank, count, empty, artistMetadata = null, past = true, oldArtistNames) {
+    const formattedArtistName = empty || artistName == null ? "" : formatArtistName(artistName);
     const tableRow = document.querySelector(`[data-rank='${getEquivalentRank(rank)}']`);
     const rankTableContent = tableRow.querySelector("[class='artist-rank']");
     const artistTableContent = tableRow.getElementsByClassName("artist-profile")[0];
@@ -29,7 +33,18 @@ export function appendTable(artistName, rank, count, empty, artistMetadata = nul
     }
 
     // animation fadeout
-    tableRow.classList.add("artist-profile-moverank")
+    if (rank == "6") {
+        console.log(oldArtistNames);
+        console.log(artistName);
+    }
+
+    if (past === false && oldArtistNames.length > 0 && (formattedArtistName !== formatArtistName(oldArtistNames[0])
+        && formattedArtistName !== formatArtistName(oldArtistNames[1])
+        && oldArtistNames.length === 3 && formattedArtistName !== formatArtistName(oldArtistNames[2]))
+    ) {
+        tableRow.classList.add("artist-profile-moverank")
+    } else {
+    }
 
     if (past) {
         logic(formattedArtistName, tableRow, rankTableContent, artistTableContent, artistColumn, artistMetadata, artistName, count, rank, past, empty);
@@ -78,7 +93,6 @@ function logic(formattedArtistName, tableRow, rankTableContent, artistTableConte
             if (count > 0 && past === false) {
                 img.addEventListener('load', function () {
                     const colors = colorThief.getColor(img).map((color) => color < 50 ? color * 2 + 30 : color);
-                    console.log(colors);
                     Array.prototype.forEach.call(childNodes, (_, index) => {
                         childNodes[index].style.backgroundColor = `rgba(${colors.join(",")}, 1)`;
                     });
@@ -115,7 +129,7 @@ function logic(formattedArtistName, tableRow, rankTableContent, artistTableConte
 
     }
     let genres = "";
-    if (!empty && artistMetadataObj && width >= 500) {
+    if (!empty && artistMetadataObj && width >= 850) {
         genres = artistMetadataObj.genres.slice(0, 4).map((genre) => `<p class="genre-chips">${genre}</p>`).join("")
     }
     const emptyMetadataPadding = artistMetadataObj ? "" : "style='padding-top:5px'";

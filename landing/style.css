@@ -92,6 +92,29 @@ h2 {
   }
 }
 
+.artist-profile-moveup {
+  -webkit-animation: moveup 200ms forwards normal ease-out;
+  animation: moveup 200ms forwards normal ease-out;
+}
+
+@keyframes moveup {
+  0% {
+    height: 100%;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes moveup {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .artist-profile-moverank {
   -webkit-animation: moveout 200ms forwards normal ease-out;
   animation: moveout 200ms forwards normal ease-out;
@@ -121,8 +144,8 @@ h2 {
 
 .artist-name {
   font-weight: 300;
+  font-size: 1rem;
   margin-top: 0;
-  margin-bottom: 0.5vh;
   margin-left: 0;
   color: rgb(214, 214, 214);
 }
@@ -138,7 +161,7 @@ h2 {
   display: flex;
   padding: 0.3vh 0.3vw;
   border-radius: 1px;
-  width: 600px;
+  width: 700px;
   height: 50px;
 }
 
@@ -234,7 +257,7 @@ h2 {
 }
 
 .listeners-text {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
 }
 
 .genre-chips {
@@ -242,7 +265,7 @@ h2 {
   border-radius: 5px;
   padding: 0.2vh 0.4vw;
   color: rgb(193, 192, 192);
-  font-size: 0.6rem;
+  font-size: 0.8rem;
 }
 
 .genre-chips:not(:last-child) {
@@ -275,9 +298,11 @@ td {
 
 #title h1 {
   margin: 0;
+  font-size: 4rem;
 }
 
 #title h2 {
+  font-size: 1.3rem;
   margin-top: 0;
   margin-bottom: 1vh;
 }
@@ -375,8 +400,8 @@ td {
 #other-links {
   display: flex;
   text-decoration: underline;
-  font-weight: 100rem;
-  font-size: 0.8rem;
+  font-weight: 100;
+  font-size: 1.5rem;
   margin: 1vh 0;
 }
 
@@ -412,8 +437,6 @@ video {
 
   margin-top: 10vh;
   margin-bottom: 3vh;
-
-  max-width: 561px;
 }
 
 #content-section h2 {
@@ -525,7 +548,7 @@ video {
 }
 
 .faq-item p {
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 #pagination {
@@ -604,6 +627,14 @@ video {
 }
 
 @media only screen and (max-width: 850px) {
+  #title h1 {
+    font-size: 2.5rem;
+  }
+
+  #title h2 {
+    font-size: 1rem;
+  }
+
   #main-content {
     grid-template-rows: auto auto auto;
     grid-template-columns: auto;
@@ -633,26 +664,22 @@ video {
     justify-content: flex-start;
     margin-top: 5vh;
     margin-bottom: 3vh;
-    max-width: 561px;
   }
 
-  #title h1 {
-    font-size: 2rem;
-  }
   #content-section h2 {
     font-size: 1rem;
   }
 
   #faq-section {
     grid-row: 3;
+    width: 75vw;
   }
 
   #faq {
-    width: 95vw;
+    width: 75vw;
   }
 
   .artist-row {
-    width: 300px;
+    width: 80vw;
   }
 }
-}}
