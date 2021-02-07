@@ -59,7 +59,7 @@ h2 {
 }
 
 #demo-img {
-  filter: grayscale(0.8);
+  filter: grayscale(0.4);
   max-width: 450px;
 }
 
@@ -180,30 +180,30 @@ h2 {
 
 .bars {
   display: flex;
-  flex-direction: row;
-  align-items: end;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
+  align-items: flex-end;
   flex: 1;
   padding-bottom: 0.3vh;
   margin-right: 0.5vw;
-  height: 18px;
+  align-self: flex-end;
+  height: 20px;
 }
 
 .bar {
   background: #e7e7e7;
   height: 0px;
   width: 3px;
-  animation: sound 0ms -800ms linear infinite alternate;
+  animation: sound ease-in infinite alternate;
 }
 
 .bar:nth-child(1) {
-  animation-duration: 564ms;
+  animation-duration: 430ms;
 }
 .bar:nth-child(2) {
-  animation-duration: 533ms;
+  animation-duration: 445ms;
 }
 .bar:nth-child(3) {
-  animation-duration: 437ms;
+  animation-duration: 500ms;
 }
 
 @keyframes sound {
@@ -213,7 +213,7 @@ h2 {
   }
   100% {
     opacity: 1;
-    height: 18px;
+    height: 10px;
   }
 }
 
@@ -687,6 +687,7 @@ video {
 
   .artist-name {
     margin-left: 3vw;
+    margin-right: 3vw;
   }
 
   .artist-column {

@@ -148,6 +148,10 @@ function logic(formattedArtistName, tableRow, rankTableContent, artistTableConte
                     </div>
                     <div class="bar  ${formattedArtistName}-bars">
                     </div>
+                    <div class="bar  ${formattedArtistName}-bars">
+                    </div>
+                    <div class="bar  ${formattedArtistName}-bars">
+                    </div>
                 </div>
                 `}
                 ${empty ? ""
