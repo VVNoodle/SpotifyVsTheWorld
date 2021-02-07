@@ -129,9 +129,10 @@ function logic(formattedArtistName, tableRow, rankTableContent, artistTableConte
 
     }
     let genres = "";
-    if (!empty && artistMetadataObj && width >= 850) {
+    if (!empty && artistMetadataObj && width >= 750) {
         genres = artistMetadataObj.genres.slice(0, 4).map((genre) => `<p class="genre-chips">${genre}</p>`).join("")
     }
+
     const emptyMetadataPadding = artistMetadataObj ? "" : "style='padding-top:5px'";
     artistColumn.className = "artist-column";
     artistColumn.innerHTML = `

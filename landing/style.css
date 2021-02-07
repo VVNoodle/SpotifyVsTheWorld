@@ -162,7 +162,7 @@ h2 {
   padding: 0.3vh 0.3vw;
   border-radius: 1px;
   width: 700px;
-  height: 50px;
+  height: 60px;
 }
 
 .artist-count {
@@ -626,7 +626,7 @@ video {
   }
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 1700px) {
   #title h1 {
     font-size: 2.5rem;
   }
@@ -634,7 +634,9 @@ video {
   #title h2 {
     font-size: 1rem;
   }
+}
 
+@media only screen and (max-width: 1200px) {
   #main-content {
     grid-template-rows: auto auto auto;
     grid-template-columns: auto;
@@ -681,5 +683,17 @@ video {
 
   .artist-row {
     width: 80vw;
+  }
+
+  .artist-name {
+    margin-left: 3vw;
+  }
+
+  .artist-column {
+    flex-direction: row;
+  }
+
+  .artist-genres {
+    flex: 1;
   }
 }
