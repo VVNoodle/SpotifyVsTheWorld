@@ -9,19 +9,19 @@
 import Foundation
 
 func formatChannelName(text: String) -> String {
-    let okayChars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890+-=().!_")
-    let filteredChars =  text.filter {okayChars.contains($0) }
-    return filteredChars.lowercased().replacingOccurrences(of: " ", with: "_")
+    let urlString = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+    print("urlString \(urlString)")
+    return urlString
 }
 
 extension PubSub {
     // proceeds when user plays a track when something else was playing
     @objc func updateArtist(notification: NSNotification) {
-        guard let foo = validateCurrentArtist(notification: notification) else {
+        guard let artistData = validateCurrentArtist(notification: notification) else {
             return
         }
-        self.currentArtist = foo
-        subscribe(formattedArtistName: self.currentArtist)
+        self.currentArtist = artistData
+        subscribe(artistData: self.currentArtist)
     }
     
     // proceeds when user plays from pause, user pause from playing
@@ -49,10 +49,23 @@ extension PubSub {
             startTimer()
         }
         
-        guard let foo = validateCurrentArtist(notification: notification) else {
+        guard let artistData = validateCurrentArtist(notification: notification) else {
             return
         }
-        self.currentArtist = foo
-        subscribe(formattedArtistName: currentArtist)
+        self.currentArtist = artistData
+        subscribe(artistData: currentArtist)
+    }
+    
+    @objc func validateCurrentArtist(notification: NSNotification) -> [String: String]? {
+        guard let notif = notification.object as? [String: Any] else { return nil }
+        guard let artist = notif["artist"] as? String else {
+            return nil }
+        guard let trackId = notif["trackId"] as? String else {
+            return nil }
+        guard let trackTitle = notif["trackTitle"] as? String else {
+            return nil }
+        
+        let formattedChannelName = formatChannelName(text: artist)
+        return ["artist": formattedChannelName, "trackId": trackId, "trackTitle": trackTitle]
     }
 }

@@ -9,125 +9,241 @@
     <link rel="stylesheet" href="./landing/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
-    <script src="./landing/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    <!-- <script src="./landing/anime.min.js"></script> -->
+    <script type="module" src="./landing/index.js"></script>
 </head>
     <body>
-        <div id="main-content">
-<div id="hero-section">
-    <div id="title">
-        <div id="the-title">
-            <h1>SpotifyVsTheWorld</h1>
-            <p>v0.2</p>
-        </div>
-        <h2>
-            Spotify live listener count on your MacOS menu bar.
-        </h2>
-        <div id="other-links">
-            <a href="#demo-section">Tutorial</a>
-            <a href="https://github.com/spotifyvstheworld/SpotifyVsTheWorld"
-                    target="_blank">GitHub</a>
-            <a href="https://trello.com/b/f7Jir52V/spotifyvstheworld" target="_blank">Roadmap</a>
-        </div>
-        <div id="hero-buttons">
-            <div id="cto-button" class="hero-button"><a
-                    href="https://github.com/spotifyvstheworld/SpotifyVsTheWorld/releases/download/ve0.1/SpotifyVsTheWorld.app.zip">
-                    Start Listening Now
-                </a></div>
-            <!-- <div id="github-button" class="hero-button sub-hero-button"><a href="https://github.com/spotifyvstheworld/SpotifyVsTheWorld"
-                    target="_blank">
-                    GitHub
-                </a></div>
-            <div id="faq-button" class="hero-button sub-hero-button"><a
-                    href="https://trello.com/b/f7Jir52V/spotifyvstheworld"
-                 >
-                    Roadmap
-                </a></div> -->
-        </div>
-    </div>
-</div>
-<div id="content-section">
-    <div id="leaderboard-section">
-        <div>
-            <table id="leaderboard-table">
-                <h2>
-                    Concurrent Listeners Leaderboard
-                </h2>
-                <div id="leaderboard-title">
-                    <div id="leaderboard-options">
-                        <div id="leaderboard-realtime" class="leaderboard-option">
-                            <a>
-                                Now
-                            </a>
-                            <svg height="20" width="20" class="blinking">
-                                <circle cx="5" cy="15" r="5" fill="red" />
-                                Sorry, your browser does not support inline SVG.
-                            </svg>
+        <div id="main-grid">
+            <nav id="navbar">
+                <div id="other-links">
+                    <a href="#faq-section">FAQ</a>
+                    <a href="https://github.com/spotifyvstheworld/SpotifyVsTheWorld" target="_blank">GitHub</a>
+                    <a href="https://trello.com/b/f7Jir52V/spotifyvstheworld" target="_blank">Roadmap</a>
+                </div>
+            </nav>
+            <div id="main-content">
+                <div id="hero-section">
+                    <div id="title">
+                        <div id="the-title">
+                            <h1>SpotifyVsTheWorld</h1>
+                            <p>v0.2</p>
                         </div>
-                        <div id="leaderboard-alltime" class="leaderboard-option">
-                            <a>
-                                All Time
-                            </a>
+                        <h2>
+                            Spotify live listener count on your MacOS menu bar.
+                        </h2>
+                        <div id="hero-buttons">
+                            <div id="cto-button" class="hero-button"><a
+                                href="https://github.com/spotifyvstheworld/SpotifyVsTheWorld/releases/download/ve0.1/SpotifyVsTheWorld.app.zip">
+                                Start Listening Now
+                            </a></div>
                         </div>
-                        <div id="leaderboard-last-6-hours" class="leaderboard-option">
-                            <a>
-                                Last Hour
-                            </a>
-                        </div>
+                        <img id="demo-img" src="./Demo/demo.gif" >
                     </div>
                 </div>
-            </table>
-            <div id="pagination">
+                <div id="content-section">
+                        <h2>
+                            Realtime Listeners Leaderboard
+                        </h2>
+                        <div id="leaderboard-options">
+                            <div id="leaderboard-realtime" class="leaderboard-option">
+                                <a>
+                                    Now
+                                </a>
+                                <svg height="20" width="15" class="blinking">
+                                    <circle cx="5" cy="15" r="5" fill="white" />
+                                    Sorry, your browser does not support inline SVG.
+                                </svg>
+                            </div>
+                            <div id="leaderboard-alltime" class="leaderboard-option">
+                                <a>
+                                    All Time
+                                </a>
+                            </div>
+                            <div id="leaderboard-last-6-hours" class="leaderboard-option">
+                                <a>
+                                    Last Hour
+                                </a>
+                            </div>
+                        </div>
+                        <div id="leaderboard-table">
+                                <div class="artist-row" data-rank="1">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="2">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="3">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="4">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="5">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="6">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="7">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="8">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="9">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="10">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="11">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="12">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="13">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="14">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="15">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="16">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="17">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="18">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="19">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                                <div class="artist-row" data-rank="20">
+                                    <div class="artist-profile artist-profile-empty">
+                                        <div class="placeholder-pic"></div>
+                                        <div class="artist-rank"></div>
+                                        <div class="artist-column"></div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div id="pagination">
+                        </div>
+                </div>
+                <section id="faq-section">
+                    <h2>FAQ</h2>
+                    <div class="faq-item">
+                        <h3>What does this app do?</h3>
+                        <p>You know how Twitch and YouTube Livestreams have realtime viewer counts? This is like that but for Spotify. This app shows the number of users also listening to the same artist you are currently listening to.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How is this different than Spotify Charts?</h3>
+                        <p>This app updates leaderboards in realtime and counts number of listeners at a given time. This also tracks artists instead of tracks.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Is this Mac only?</h3>
+                        <p>Yes. At least for now.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do you count tracks with multiple artists?</h3>
+                        <p>We count the Artist which "hosts" the track you're playing.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do you count remixes?</h3>
+                        <p>The artist being remixed gets the count.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Where to share feature requests?</h3>
+                        <p>GitHub isues page</p>
+                    </div>
+                </section>
             </div>
+            <footer id="footer-section">
+                <p>
+                    Made with caffeine by Egan
+                </p>
+            </footer>
         </div>
-    </div>
-</div>
-<div id="demo-section">
-    <h2>Tutorial</h2>
-    <!-- <video width="450" height="500" controls>
-        <source src="./landing/demo.webm" type="video/webm">
-        <source src="./landing/demo.mp4" type="video/mp4">
-        I'm sorry; your browser doesn't support HTML5 video.
-    </video> -->
-    <p>1. Open up Spotify and SpotifyVsTheWorld</p>
-    <img src="./landing/Step1.png" alt="first step: open spotify + spotifyvstheworld">
-
-    <p>2. Play music</p>
-    <img src="./landing/Step2.png" alt="second step: play music" >
-    
-    <p>3. Status bar shows artist realtime listener count</p>
-    <img src="./landing/Step3.png" alt="done!">
-    <img src="./Demo/demo.gif" >
-</div>
-<section id="faq-section">
-    <div id="faq">
-        <h2>FAQ</h2>
-        <div class="faq-item">
-            <h3>What does this app do?</h3>
-            <p>You know how Twitch and YouTube Livestreams have realtime viewer counts? This is like that but for Spotify. When you're listening to a track on Spotify, this app shows the number of users also listening to the same artist of that track at the same moment.</p>
-        </div>
-        <div class="faq-item">
-            <h3>Is this only for Mac?</h3>
-            <p>Yes. At least for now. We have plans to include more platforms</p>
-        </div>
-        <div class="faq-item">
-            <h3>How do you count tracks with multiple artists?</h3>
-            <p>One of the artists is randomly chosen. Yeah. This doesn't make sense and of course the plan is to include all of them. A reminder that It's not 1.0 yet :)</p>
-        </div>
-        <div class="faq-item">
-            <h3>How do you count remixes?</h3>
-            <p>The artist being remixed gets the count. This is clearly not ideal. The plan is to consider both the artist(s) being remixed AND the remixer(s)</p>
-        </div>
-        <div class="faq-item">
-            <h3>I have a feature request. Where can I share this?</h3>
-            <p>GitHub isues page</p>
-        </div>
-    </div>
-</section>
-        </div>
-        <footer id="footer-section">
-            <p>
-                Made with caffeine by Egan
-            </p>
-        </footer>
     </body>
 </html>

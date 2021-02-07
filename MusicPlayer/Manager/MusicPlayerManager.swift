@@ -32,7 +32,7 @@ public class MusicPlayerManager {
 public extension MusicPlayerManager {
     
     /// The player names that added to the manager.
-    public var allPlayerNames: [MusicPlayerName] {
+    var allPlayerNames: [MusicPlayerName] {
         var playerNames = [MusicPlayerName]()
         for player in musicPlayers {
             playerNames.append(player.name)
@@ -41,7 +41,7 @@ public extension MusicPlayerManager {
     }
     
     /// Return the player with selected name if exists.
-    public func existMusicPlayer(with name: MusicPlayerName) -> MusicPlayer? {
+    func existMusicPlayer(with name: MusicPlayerName) -> MusicPlayer? {
         for player in musicPlayers {
             if player.name == name {
                 return player
@@ -53,7 +53,7 @@ public extension MusicPlayerManager {
     /// Add a music player to the manager.
     ///
     /// - Parameter name: The name of the music player you wanna add.
-    public func add(musicPlayer name: MusicPlayerName) {
+    func add(musicPlayer name: MusicPlayerName) {
         for player in musicPlayers {
             guard player.name != name else { return }
         }
@@ -67,7 +67,7 @@ public extension MusicPlayerManager {
     /// Add music players to the manager.
     ///
     /// - Parameter names: The names of the music player you wanna add.
-    public func add(musicPlayers names: [MusicPlayerName]) {
+    func add(musicPlayers names: [MusicPlayerName]) {
         for name in names {
             if (name == .spotify && onlyObservePlaybackOnce == true) {
                 onlyObservePlaybackOnce = false
@@ -79,7 +79,7 @@ public extension MusicPlayerManager {
     /// Remove a music player from the manager.
     ///
     /// - Parameter name: The name of the music player you wanna remove.
-    public func remove(musicPlayer name: MusicPlayerName) {
+    func remove(musicPlayer name: MusicPlayerName) {
         for index in 0 ..< musicPlayers.count {
             let player = musicPlayers[index]
             guard player.name == name else { continue }
@@ -98,14 +98,14 @@ public extension MusicPlayerManager {
     /// Remove music players from the manager.
     ///
     /// - Parameter names: The names of the music player you wanna remove.
-    public func remove(musicPlayers names: [MusicPlayerName]) {
+    func remove(musicPlayers names: [MusicPlayerName]) {
         for name in names {
             remove(musicPlayer: name)
         }
     }
     
     /// Remove all music players from the manager.
-    public func removeAllMusicPlayers() {
+    func removeAllMusicPlayers() {
         for player in musicPlayers {
             player.stopPlayerTracking()
         }
@@ -126,8 +126,20 @@ extension MusicPlayerManager: MusicPlayerDelegate {
         if (observePlayback) {
             queue.async { [weak self] in
                 guard let self = self else { return }
+                
+                guard let trackTitle = self.currentPlayer?.currentTrack?.title else { return }
                 guard let artistName = self.currentPlayer?.currentTrack?.artist else { return }
-                NotificationCenter.default.post(name: self.pubSubArtistChangeNotification, object: ["artistName": artistName])
+                
+                guard let spotifyUri = self.currentPlayer?.currentTrack?.id else { return }
+                guard let range = spotifyUri.range(of: "track:") else { return }
+                let trackId = String(spotifyUri[range.upperBound...])
+                
+                let data = [
+                    "artist": artistName,
+                    "trackId": trackId,
+                    "trackTitle": trackTitle
+                ]
+                NotificationCenter.default.post(name: self.pubSubArtistChangeNotification, object: data)
             }
         }
     }
@@ -149,8 +161,19 @@ extension MusicPlayerManager: MusicPlayerDelegate {
         if (observePlayback) {
             queue.async { [weak self] in
                 guard let self = self else { return }
+                guard let trackTitle = self.currentPlayer?.currentTrack?.title else { return }
                 guard let artistName = self.currentPlayer?.currentTrack?.artist else { return }
-                NotificationCenter.default.post(name: self.pubSubPlaybackNotification, object: ["isPlaying": playbackState != .stopped && playbackState != .paused, "artistName": artistName])
+                guard let spotifyUri = self.currentPlayer?.currentTrack?.id else { return }
+                guard let range = spotifyUri.range(of: "track:") else { return }
+                let trackId = String(spotifyUri[range.upperBound...])
+                
+                let data: [String: Any] = [
+                    "isPlaying": playbackState != .stopped && playbackState != .paused,
+                    "artist": artistName,
+                    "trackId": trackId,
+                    "trackTitle": trackTitle
+                ]
+                NotificationCenter.default.post(name: self.pubSubPlaybackNotification, object: data)
             }
         }
     }
